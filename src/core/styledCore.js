@@ -26,8 +26,7 @@ const styledCore = (props) => {
 
     const finalCSS = [baseCSS, pseudoCSS, dynamicCSS].join('\n')
 
-    // console.log(baseCSS)
-    console.log(finalCSS)
+    // console.log(finalCSS)
     return finalCSS
 }
 

@@ -1,0 +1,125 @@
+{
+    "workbench.colorTheme": "Monokai Dimmed",
+    "editor.tokenColorCustomizations": {
+        "[Brackets Light Pro]": {
+            "textMateRules": [
+                {
+                    "scope": ["variable.other.constant.js"],
+                    "settings": {
+                        "foreground": "#c01169" // 밝은 주황색 (상수)
+                        // "fontStyle": "italic"
+                    }
+                },
+                {
+                    "scope": ["variable.other.readwrite.js"],
+                    "settings": {
+                        "foreground": "#d6488f" // 부드러운 갈색 (읽기/쓰기 변수)
+                    }
+                },
+                {
+                    "scope": ["storage.type.js"],
+                    "settings": {
+                        "foreground": "#0b4270", // 파란색 (키워드)
+                        "fontStyle": "bold"
+                    }
+                },
+                {
+                    "scope": "meta.object-literal.key.js",
+                    "settings": {
+                        "foreground": "#3c9699" // 더 어두운 색으로 강조
+                    }
+                },
+                {
+                    "scope": "entity.name.function.js",
+                    "settings": {
+                        "fontStyle": "italic"
+                        // "fontStyle": "bold"
+                    }
+                },
+                // {
+                //     "scope": "meta.block.js",
+                //     "settings": {
+                //         "foreground": "#00A6FB" // 파란색 (키워드)
+                //     }
+                // },
+                {
+                    "scope": "variable.other.property.js",
+                    "settings": {
+                        "foreground": "#00A6FB" // 파란색 (키워드)
+                    }
+                }
+
+                // {
+                //     "scope": ["storage.type.function.js"],
+                //     "settings": {
+                //         "foreground": "#ff4c4c",
+                //         "fontStyle": "italic bold"
+                //     }
+                // },
+                // {
+                //     "scope": ["variable.parameter.js"],
+                //     "settings": {
+                //         "foreground": "#ff4c4c",
+                //         "fontStyle": "bold"
+                //     }
+                // },
+                // {
+                //     "scope": ["string.template.js", "variable.other.object.js", "string.quoted.single.js"],
+                //     "settings": {
+                //         "fontStyle": ""
+                //     }
+                // },
+                // {
+                //     "scope": ["comment"],
+                //     "settings": {
+                //         "foreground": "#c4c23b",
+                //         "fontStyle": ""
+                //     }
+                // },
+                // {
+                //     "scope": ["storage.type.js", "support.variable.property.js"],
+                //     "settings": {
+                //         "foreground": "#FFFFFF",
+                //         "fontStyle": ""
+                //     }
+                // },
+                // {
+                //     "scope": ["meta.block.js", "text.html.derivative"],
+                //     "settings": {
+                //         "foreground": "#bfbfbf"
+                //     }
+                // },
+                // {
+                //     "scope": ["punctuation.definition.tag.end.html", "punctuation.definition.tag.begin.html", "keyword.operator.relational.js"],
+                //     "settings": {
+                //         "foreground": "#9f9f9f"
+                //     }
+                // },
+                // {
+                //     "scope": ["entity.other.attribute-name.html", "entity.other.attribute-name.pseudo-class.css"],
+                //     "settings": {
+                //         "foreground": "#859900",
+                //         "fontStyle": ""
+                //     }
+                // }
+            ]
+        }
+    },
+    "editor.semanticTokenColorCustomizations": {
+        "[Brackets Light Pro]": {
+            "rules": {
+                // "function.declaration": {
+                //     "foreground": "#d782c6",
+                //     "fontStyle": ""
+                // },
+                // "string.quoted.single.js": {
+                //     "fontStyle": ""
+                // },
+                // "function.defaultLibrary": {
+                //     "foreground": "#d782c6",
+                //     "fontStyle": "italic bold"
+                // }
+            }
+        }
+    }
+}

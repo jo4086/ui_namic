@@ -5,8 +5,8 @@ function App() {
     const [value, setValue] = useState('')
     return (
         <>
-            <Box type="input" value={value} onChange={(e) => setValue(e.target.value)} {...BoxStyle} />
-            <Box {...style2}>Hi</Box>
+            <Box type="input" value={value} onChange={(e) => setValue(e.target.value)} dynamicType="onChange" {...BoxStyle} />
+            {/* <Box {...style2}>Hi</Box> */}
         </>
     )
 }
@@ -46,13 +46,14 @@ const style2 = {
     margin: '20px',
     border: '1px solid black',
     width: '200px',
-  position: 'relative',
-    
+    position: 'relative',
+
     after: {
         content: '"hihi"',
         position: 'absolute',
         top: '0px',
         right: '0px',
     },
+   
 }
 export default App
