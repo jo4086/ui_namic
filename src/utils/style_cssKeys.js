@@ -79,6 +79,10 @@ const commonPropsKeys = [
     'fontFamily',
     'alignSelf',
     'justifySelf',
+    'opacity',
+    'transition',
+    'transform',
+    'whiteSpace',
 ]
 const validKeys = {
     flex: flexPropsKeys,

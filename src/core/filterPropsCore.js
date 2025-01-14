@@ -1,14 +1,13 @@
+// filterPropsCore.js
+
 import filterPseudoProps from '../utils/filter_pseudoProps.js'
 import filterStyleProps from '../utils/filter_styleProps.js'
-import useTriggerDynamicClass from '../utils/trigger_dynamicClass.js'
 
 const filterPropsCore = (config) => {
     const { props, display, type, pseudo, dynamicType } = config
     const isDynamicType = Boolean(dynamicType)
     const onEvent = props[dynamicType]
-    console.log('isDynamicType?', isDynamicType)
-    console.log('dynamicType:', dynamicType)
-    console.log('onEvent:', onEvent)
+    const value = props?.value
 
     const objectProps = {}
     const stringProps = {}
@@ -26,7 +25,7 @@ const filterPropsCore = (config) => {
     const { validCss, validDisplay, strings } = filterStyleProps({ stringProps, type, display })
 
     const { pseudoProps, nonPseudoProps, isDynamic } = filterPseudoProps({ objectProps, type, pseudo })
-    console.log(isDynamic)
+    // console.log(isDynamic)
 
     const styles = {
         ...(validDisplay && { display: validDisplay }),
@@ -44,7 +43,7 @@ const filterPropsCore = (config) => {
     }
     const dynamicTrigger = isDynamic && isDynamicType
 
-    const dynamicClass = { dynamicTrigger, dynamicType }
+    const dynamicClass = { dynamicTrigger, dynamicType, onEvent, value }
 
     const filter = {
         ...nonStyles,
