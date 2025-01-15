@@ -1,5 +1,6 @@
 import Box from './components/Layout/Box'
 import { useState } from 'react'
+import NavButton from './components/Navigate/NavButton'
 
 // 아예 App.js의 리턴문 바깥에 두거나
 const BoxStyle = {
@@ -54,6 +55,7 @@ function App() {
                 onMouseLeave={() => console.log('Mouse Left!')}>
                 Hover Over Me
             </Box>
+            <NavButton to='/origin' >Link</NavButton>
         </>
     )
 }
