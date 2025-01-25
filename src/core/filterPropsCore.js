@@ -2,6 +2,7 @@
 
 import filterPseudoProps from '../utils/filter_pseudoProps.js'
 import filterStyleProps from '../utils/filter_styleProps.js'
+import filterPropsType from '../utils/filter_propsType.js'
 
 const filterPropsCore = (config) => {
     const { props, display, type, pseudo, dynamicType } = config
@@ -9,28 +10,33 @@ const filterPropsCore = (config) => {
     const onEvent = props[dynamicType]
     const value = props?.value
 
-    const objectProps = {}
-    const stringProps = {}
-    const functionProps = {}
+    // const objectProps = {}
+    // const stringProps = {}
+    // const functionProps = {}
 
-    Object.entries(props).forEach(([key, value]) => {
-        if (typeof value === 'function') {
-            functionProps[key] = value
-        } else if (typeof value === 'object' && value !== null) {
-            objectProps[key] = value
-        } else {
-            stringProps[key] = value
-        }
-    })
+    // Object.entries(props).forEach(([key, value]) => {
+    //     if (typeof value === 'function') {
+    //         functionProps[key] = value
+    //     } else if (typeof value === 'object' && value !== null) {
+    //         objectProps[key] = value
+    //     } else {
+    //         stringProps[key] = value
+    //     }
+    // })
+
+    const { keyframeProps, mediaProps, objectProps, stringProps, functionProps } = filterPropsType(props)
+
+    // 1. 스타일 필터링
     const { validCss, validDisplay, strings } = filterStyleProps({ stringProps, type, display })
 
     const { pseudoProps, nonPseudoProps, isDynamic } = filterPseudoProps({ objectProps, type, pseudo })
-    // console.log(isDynamic)
 
     const styles = {
         ...(validDisplay && { display: validDisplay }),
         ...(validCss || {}),
         ...(pseudoProps || {}),
+        ...(mediaProps || {}),
+        ...(keyframeProps || {})
     }
 
     const nonStyles = {

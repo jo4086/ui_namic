@@ -83,6 +83,7 @@ const commonPropsKeys = [
     'transition',
     'transform',
     'whiteSpace',
+    'animation'
 ]
 const validKeys = {
     flex: flexPropsKeys,
