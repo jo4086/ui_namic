@@ -63,20 +63,7 @@ function App() {
     )
 }
 
-/*
-리턴문이 끝난 뒤 두개가 가능하단 말이였어
-
-function App () => {
-    여기에 스타일 코드를 적지않고
-
-    return(
-    <>
-        <div>
-    </>
-    )
-}
-    
-*/
+export default App
 const BoxStyle2 = {
     userSelect: 'none',
     color: 'black',
@@ -255,4 +242,45 @@ const BoxStyle3 = {
     },
 }
 
-export default App
+const BoxAnimation = {
+    move: {
+        animation: '1s 1',
+        frames: {
+            0: {
+                transform: 'translateX(0%)',
+                opacity: 1,
+            },
+            100: {
+                transform: 'translateX(50%)',
+                opacity: 0,
+                cursor: 'default',
+            },
+        },
+    },
+    scale: {
+        animation: '3s 5',
+        frames: {
+            0: {
+                transform: 'scale(1)',
+            },
+            100: {
+                transform: 'scale(1.5)',
+            },
+        },
+    },
+}
+
+function createAnimation(name, duration, timing, repeat, keyframes) {
+    return { name, duration, timing, repeat, keyframes }
+}
+
+const BoxAnimation2 = {
+    move: createAnimation('move', '1s', 'ease-in-out', 1, {
+        0: { transform: 'translateX(0%)', opacity: 1 },
+        100: { transform: 'translateX(50%)', opacity: 0 },
+    }),
+    scale: createAnimation('scale', '3s', 'linear', 5, {
+        0: { transform: 'scale(1)' },
+        100: { transform: 'scale(1.5)' },
+    }),
+}
