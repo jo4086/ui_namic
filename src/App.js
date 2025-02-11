@@ -63,20 +63,7 @@ function App() {
     )
 }
 
-/*
-리턴문이 끝난 뒤 두개가 가능하단 말이였어
-
-function App () => {
-    여기에 스타일 코드를 적지않고
-
-    return(
-    <>
-        <div>
-    </>
-    )
-}
-    
-*/
+export default App
 const BoxStyle2 = {
     userSelect: 'none',
     color: 'black',
@@ -255,101 +242,45 @@ const BoxStyle3 = {
     },
 }
 
-export default App
-
-/* 
-
-const BoxStyle3 = {
-    userSelect: 'none',
-    color: 'black',
-    fontSize: '20px',
-    border: '1px solid black',
-    outline: '0px',
-    width: '500px',
-    margin: '30px auto 0 30px',
-    backgroundColor: 'white',
-    justifyContent: 'end',
-    padding: '0 20px',
-    boxSizing: 'border-box',
-    textAlign: 'right',
-    transition: 'all 0.5s ease',
-    cursor: 'pointer',
-    whiteSpace: 'nowrap',
-    hover: {
-        color: 'green',
-        backgroundColor: 'black',
-    },
-    position: 'relative',
-    after: {
-        position: 'absolute',
-        content: '"hello"',
-        left: '30px',
-        top: '3px',
-        fontSize: '16px',
-        transition: 'all 0.5s ease',
-    },
-    before: {
-        position: 'absolute',
-        content: '"Click to Change Opacity"',
-        right: '-220px',
-        top: '0px',
-    },
-    dynamic: {
-        color: 'blue',
-        backgroundColor: 'pink',
-        padding: '0 200px',
-        after: {
-            fontSize: '12px',
-            left: '460px',
-            top: '6px',
-            transition: 'all 0.5s ease',
-        },
-        before: {
-            opacity: '0',
-            transition: 'all 0.5s ease',
-        },
-        hover: {
-            backgroundColor: 'red',
-            color: 'white',
-        },
-    },
-    media: {
-        min: 768,
-        max: 1024,
-        style: {
-            width: '200px',
-            height: '50px',
-        },
-    },
-
-    keyframe: {
-        scale: {
-            animation: '1s 1',
-            frames: {
-                0: {
-                    transform: 'translateX(0%)',
-                    opacity: 1,
-                },
-                to: {
-                    transform: 'translateX(50%)',
-                    opacity: 0,
-                    cursor: 'default',
-                },
+const BoxAnimation = {
+    move: {
+        animation: '1s 1',
+        frames: {
+            0: {
+                transform: 'translateX(0%)',
+                opacity: 1,
+            },
+            100: {
+                transform: 'translateX(50%)',
+                opacity: 0,
+                cursor: 'default',
             },
         },
-        translate: {
-            animation: '4s 5 ease in out',
-            frames: {
-                0: {
-                    transform: 'translateX(-50%)',
-                    opacity: 0,
-                },
-                to: {
-                    opacity: 1,
-                },
+    },
+    scale: {
+        animation: '3s 5',
+        frames: {
+            0: {
+                transform: 'scale(1)',
+            },
+            100: {
+                transform: 'scale(1.5)',
             },
         },
     },
 }
 
-*/
+function createAnimation(name, duration, timing, repeat, keyframes) {
+    return { name, duration, timing, repeat, keyframes }
+}
+
+const BoxAnimation2 = {
+    move: createAnimation('move', '1s', 'ease-in-out', 1, {
+        0: { transform: 'translateX(0%)', opacity: 1 },
+        100: { transform: 'translateX(50%)', opacity: 0 },
+    }),
+    scale: createAnimation('scale', '3s', 'linear', 5, {
+        0: { transform: 'scale(1)' },
+        100: { transform: 'scale(1.5)' },
+    }),
+}
