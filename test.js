@@ -2,6 +2,7 @@ const testes = () => {
     return (
         <>
             <h2>hi2</h2>
+            <h3>hi3</h3>
         </>
     )
 }
