@@ -25,7 +25,7 @@ const styledCore = (props) => {
             }
             return acc
         },
-        { keyframeProps: {}, pseudoProps: {}, mediaProps: {}, dynamicProps: {}, stringProps: {} },
+        { keyframeProps: {}, pseudoProps: {}, mediaProps: {}, dynamicProps: {}, stringProps: {} }
     )
 
     // const dynamicProps = {}

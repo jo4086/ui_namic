@@ -1,0 +1,44 @@
+{
+  "name": "ui-namic",
+  "version": "0.1.0",
+  "description": "Dynamic styling React component library",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "echo \"Build command here\"",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": ["react", "ui", "components", "styled-components"],
+  "author": "Your Name",
+  "license": "MIT",
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
+    "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0",
+    "styled-components": "^5.0.0 || ^6.0.0"
+  }
+}
+
+
+{
+  "name": "ui-namic",
+  "version": "0.1.0",
+  "description": "Dynamic styling React component library",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "files": ["dist"],
+  "scripts": {
+    "build": "rollup -c",
+    "test": "jest"
+  },
+  "peerDependencies": {
+    "react": "^16.8.0 || ^17.0.0 || ^18.0.0",
+    "react-dom": "^16.8.0 || ^17.0.0 || ^18.0.0",
+    "styled-components": "^5.0.0 || ^6.0.0"
+  },
+  "keywords": ["react", "ui", "components", "styled-components", "dynamic-styling"],
+  "author": "jo4086",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/jo4086/ui_namic.git"
+  }
+}

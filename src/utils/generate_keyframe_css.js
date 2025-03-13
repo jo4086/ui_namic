@@ -6,7 +6,7 @@ const generateKeyframeCSS = (keyframes) => {
     const keyframeMap = {}
 
     Object.entries(keyframes).forEach(([key, value]) => {
-        console.log(key)
+        // console.log(key)
 
         const validValue = validKeyframes(value)
 
@@ -36,7 +36,7 @@ ${content}
     }`)
     }
 
-    console.log(keyframeBlocks.join('\n'))
+    // console.log(keyframeBlocks.join('\n'))
     return keyframeBlocks.join('\n')
 }
 

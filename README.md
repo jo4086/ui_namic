@@ -1,70 +1,79 @@
-# Getting Started with Create React App
+📝 개선된 README 초안
+# 📌 ui_namic
+<예시 동작 GIF 첨부 및 간단한 코드 예제>
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## 🚀 소개
+저는 6개월간 아카데미에서 HTTP, CSS부터 시작해 Node.js, React까지 배운 신입 개발자입니다.
 
-## Available Scripts
+이 프로젝트의 시작은 MUI를 사용하면서 겪은 어려움과 재사용 가능한 스타일 시스템을 직접 만들어 보고 싶다는 욕심에서 비롯되었습니다.
+아카데미에서 개인 프로젝트를 진행하며, MUI에 의존하지 않고 Styled-components를 활용하여 재사용 가능한 컴포넌트와 props에 대한 이해도를 높이기 위해 직접 스타일 시스템을 정의해 보기로 했습니다.
 
-In the project directory, you can run:
+처음에는 단순히 props로 CSS를 넘겨주는 방식이었지만, 점점 더 편리한 스타일링 라이브러리를 만들고 싶다는 욕심이 생겼습니다.
+초기에는 미흡한 코드였지만, CSS를 자동화하는 유틸리티 함수의 필요성을 깨닫고 점점 발전하게 되었습니다.
 
-### `yarn start`
+<초기 코드 예제>
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## 🔄 개발 과정 & 시행착오
+처음에는 props를 활용해 직접 CSS를 적용하는 단순한 방식이었습니다. 하지만,
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+props의 개수가 많아질수록 유지보수가 어려워지고,
+외부 라이브러리와의 결합이 복잡해지는 문제를 겪었습니다.
+이에 따라 내부적으로 props를 분리하고, 불필요한 속성은 필터링하면서 필요한 값만 유지하는 유틸리티 함수가 필요하다는 것을 깨닫게 되었고, 이를 기반으로 자동화된 스타일 시스템을 만들기 시작했습니다.
 
-### `yarn test`
+📌 시행착오 과정 및 코드 변화 기록: [링크 추가 예정]
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+그 과정에서 단순한 props 전달이 아닌, 가상 선택자(pseudo-selectors)와 다양한 on이벤트를 결합하여 동적인 스타일을 자동으로 적용할 수 있는 방식을 구상하게 되었습니다.
 
-### `yarn build`
+결과적으로, 이 프로젝트는 개인 프로젝트 기간 동안 발전하여 하나의 스타일링 라이브러리로 탄생하게 되었습니다. 🎉
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## 🎯 프로젝트 목표
+이 라이브러리는 다양한 가상(pseudo) 선택자와 이벤트 기반 스타일링을 동적으로 적용할 수 있도록 하는 것이 목표입니다.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+이를 위해,\
+✔ dynamic이라는 키를 중심으로\
+✔ dynamicType과 dynamicCss props를 활용하여\
+✔ 특정 이벤트에 맞춰 자동으로 스타일이 적용되는 시스템을 구축했습니다.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+### 🏗 아키텍처
+이 라이브러리는 두 개의 핵심 폴더로 구성됩니다.
 
-### `yarn eject`
+**🔹 1. cores/ (중앙 스타일 관리 시스템)**
+ - CSS를 생성하고 조합하는 핵심 로직이 포함된 폴더입니다.
+- 전달받은 props를 적절히 분리하고, 필요한 유틸리티 함수로 전달한 뒤 최종적으로 스타일을 생성합니다.
+**🔹 2. utils/ (스타일 생성 유틸리티 함수)**
+- cores/에서 호출하는 비즈니스 로직이 포함된 파일들이 모여 있습니다.
+- 주요 기능별로 4가지로 나뉩니다.
+- 📌 utils/ 주요 모듈
+    - 1️⃣ filters/ → props의 타입 분리, 특정 키(dynamic, pseudo, media, keyframes) 추출
+    - 2️⃣ generates/ → 분리된 props를 CSS 코드로 변환 (dynamic, media, keyframes, pseudo 등)
+     - 3️⃣ keys/ → 유효성 검사 (올바른 CSS 속성 및 display 값 확인)
+    - 4️⃣ triggers/ → 입력된 이벤트에 따라 상태를 변경하는 커스텀 use 훅
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+## 🔸 추가적인 시스템
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- errors/ → keys/를 통해 잘못된 스타일을 검출하여 에러를 표시
+- styled-components 기반의 JS 파일 → 전체 스타일 시스템을 작동시키는 핵심 파일들
+- 재사용 가능한 컴포넌트 → 최종적으로 이 파일을 통해 실제 UI에서 스타일을 적용
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+📌 디렉토리 구조 및 아키텍처 흐름도 (이미지 첨부 예정)
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## 📢 함께 만들어 나가고 싶습니다!
+저는 아직 미숙한 개발자지만, 이 프로젝트에 대한 애착이 큽니다.\
+하지만 혼자서 발전시키기에는 한계가 있기 때문에, 많은 분들의 피드백과 기여가 필요합니다.
 
-## Learn More
+## 🛠 이 프로젝트가 흥미롭게 느껴진다면 기여해주세요!
+언제든지 환영합니다. 🙌
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+### 💡 기여 방법
+이슈 등록 → 개선할 점이나 버그를 Issues에 남겨주세요!\
+PR (Pull Request) 제출 → 기능을 개선하고 싶다면 자유롭게 PR을 열어주세요.\
+토론 참여 → Discussions에서 의견을 나누고, 방향성을 함께 정해가면 좋겠습니다.\
+📌 기여 가이드 문서 (추후 추가 예정)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+## 📄 라이선스
+이 프로젝트는 MIT 라이선스를 따릅니다.
 
-### Code Splitting
+## 🔥 결론
+이 프로젝트는 단순한 스타일링 툴이 아니라, 재사용 가능한 UI 시스템을 고민하고 발전시키는 과정에서 탄생한 라이브러리입니다.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `yarn build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+React에서 더욱 유연하고 동적인 스타일링을 하고 싶다면, 함께 발전시켜 나가요! 🚀

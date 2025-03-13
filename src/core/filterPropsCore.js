@@ -10,20 +10,6 @@ const filterPropsCore = (config) => {
     const onEvent = props[dynamicType]
     const value = props?.value
 
-    // const objectProps = {}
-    // const stringProps = {}
-    // const functionProps = {}
-
-    // Object.entries(props).forEach(([key, value]) => {
-    //     if (typeof value === 'function') {
-    //         functionProps[key] = value
-    //     } else if (typeof value === 'object' && value !== null) {
-    //         objectProps[key] = value
-    //     } else {
-    //         stringProps[key] = value
-    //     }
-    // })
-
     const { keyframeProps, mediaProps, objectProps, stringProps, functionProps } = filterPropsType(props)
 
     // 1. 스타일 필터링
@@ -36,7 +22,7 @@ const filterPropsCore = (config) => {
         ...(validCss || {}),
         ...(pseudoProps || {}),
         ...(mediaProps || {}),
-        ...(keyframeProps || {})
+        ...(keyframeProps || {}),
     }
 
     const nonStyles = {

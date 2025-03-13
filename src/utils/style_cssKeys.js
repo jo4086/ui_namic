@@ -83,7 +83,9 @@ const commonPropsKeys = [
     'transition',
     'transform',
     'whiteSpace',
-    'animation'
+    'animation',
+    'willChange',
+    'all',
 ]
 
 const validKeys = {
