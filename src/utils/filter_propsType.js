@@ -18,7 +18,7 @@ const filterPropsType = (props) => {
         },
         { keyframeProps: {}, mediaProps: {}, objectProps: {}, stringProps: {}, functionProps: {} },
     )
-
+// test
     return { functionProps, stringProps, keyframeProps, mediaProps, objectProps }
 }
 
