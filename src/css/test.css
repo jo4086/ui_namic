@@ -48,34 +48,82 @@
 } */
 
 .container {
+    overflow-y: scroll;
+    height: 2000px;
+    /* display: grid; */
+    /* width: var(--layout); */
+    /* margin: 0 auto; */
+    /* grid-template-rows: 80px 1300px 130px; */
+    /* grid-template-columns: 4fr 4fr 4fr;
+    grid-template-areas:
+        'header header header'
+        'main main main'
+        'section section aside'
+        'footer footer footer';
+
+    gap: 10px; */
+}
+
+:root {
+    --nav-height: 80px;
+    --layout: 1280px;
+}
+* {
+    list-style-type: none;
+    box-sizing: border-box;
+}
+
+.common {
+    overflow-x: hidden;
+}
+
+.section_common {
+    padding: 10px;
+}
+
+.header {
+    grid-area: header;
+    background: lightblue;
+    position: fixed;
+    margin: 0 auto;
+    height: var(--nav-height);
+    width: 100%;
+    z-index: 9999;
+    padding: 10px;
+}
+
+.main {
+    background: lightgreen;
     display: grid;
     width: var(--layout);
     margin: 0 auto;
-    margin-top: var(--nav-height);
-    grid-template-rows: 80px 1300px 130px;
+    margin-top: calc(var(--nav-height) + 10px);
+    /* grid-template-rows: var(--nav-height); */
     grid-template-columns: 4fr 4fr 4fr;
     grid-template-areas:
-        'main main aside'
+        'section1 section1 aside'
+        'section2 section2 aside'
+        'section3 section3 aside'
         'footer footer footer';
 
     gap: 10px;
 }
 
-.common {
-    overflow-x: hidden;
-    /* overflow-x: scroll; */
+.section1 {
+    grid-area: section1;
+    background: blueviolet;
 }
 
-.header {
-    background: lightblue;
-    position: fixed;
-    height: var(--nav-height);
-    width: var(--layout);
+.section2 {
+    grid-area: section2;
+    background: blueviolet;
 }
-.main {
-    grid-area: main;
-    background: lightgreen;
+
+.section3 {
+    grid-area: section3;
+    background: blueviolet;
 }
+
 .aside {
     grid-area: aside;
     background: lightcoral;

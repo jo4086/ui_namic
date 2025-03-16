@@ -1,7 +1,10 @@
 const flexPropsKeys = [
     'display', // 반드시 'flex'여야 유효
-    'flexDirection',
+    'flexFlow',
+    'flexDirecwtion',
+    'flexWrap',
     'justifyContent',
+    'alignContent',
     'alignItems',
     'gap',
 ]
@@ -13,6 +16,19 @@ const gridPropsKeys = [
     'gridGap',
     'alignItems',
     'justifyContent',
+
+    'gridTemplateRows',
+    'gridTemplateColumns',
+    'gridTemplateAreas',
+    'gridTemplate',
+    'rowGap',
+    'columnGap',
+    'gap',
+
+    'gridAutoRows',
+    'gridAutoColumns',
+    'gridAutoFlow',
+    
 ]
 
 const tablePropsKeys = [
@@ -25,6 +41,17 @@ const tablePropsKeys = [
     'emptyCells',
     'tableLayout',
 ]
+
+const flexItems = [
+    'order', // flex 자식 속성들
+    'flex',
+    'flexGrow',
+    'flexShrink',
+    'flexBasis',
+    'alignSelf',
+]
+
+const gridItems = []
 
 // 공통 속성
 const commonPropsKeys = [
@@ -54,7 +81,6 @@ const commonPropsKeys = [
     'minHeight',
     'aspectRatio',
     'boxSizing',
-    'flexGrow',
     'outline',
     'tabindex',
     'caretColor',
@@ -86,36 +112,5 @@ const commonPropsKeys = [
     'animation',
     'willChange',
     'all',
+    ...flexItems,
 ]
-
-const validKeys = {
-    flex: flexPropsKeys,
-    grid: gridPropsKeys,
-    table: tablePropsKeys,
-}
-
-const allCssKeys = new Set([...commonPropsKeys, ...tablePropsKeys, ...gridPropsKeys, ...flexPropsKeys])
-
-const styleCssKeys = (config) => {
-    const { stringProps, displayCategory } = config
-
-    const validCssKeys = new Set([...commonPropsKeys, ...(displayCategory ? validKeys[displayCategory] || [] : [])])
-
-    const validCss = {}
-    const invalidCss = {}
-    const strings = {}
-
-    Object.entries(stringProps).forEach(([key, value]) => {
-        if (validCssKeys.has(key)) {
-            validCss[key] = value
-        } else if (allCssKeys.has(key)) {
-            invalidCss[key] = value
-        } else {
-            strings[key] = value
-        }
-    })
-
-    return { validCss, strings }
-}
-
-export default styleCssKeys

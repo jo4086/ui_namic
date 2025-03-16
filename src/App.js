@@ -43,12 +43,15 @@ function App() {
         <>
             {/* <Box type="input" value={value} onChange={(e) => setValue(e.target.value)} dynamicType="onChange" {...BoxStyle} /> */}
 
-            {/* <Box type="div" className="div_1" onClick={() => setShowPage((prev) => !prev)} dynamicType="onClick" {...BoxStyle2}>
+            <Box type="table" display="talbe" className="div_1" onClick={() => setShowPage((prev) => !prev)} dynamicType="onClick" {...BoxStyle2}>
+                <Box type="thead"></Box>
+            </Box>
+            <Box type="div" display="flex" className="div_1" onClick={() => setShowPage((prev) => !prev)} dynamicType="onClick" {...BoxStyle2}>
                 Click to Apply Dynamic Style
             </Box>
             <Box type="div" onClick={() => setShowPage((prev) => !prev)} dynamicType="onClick" {...BoxStyle3}>
                 Click to Apply Dynamic Style
-            </Box> */}
+            </Box>
 
             {/* <Box
                 type="div"
@@ -78,21 +81,23 @@ function App() {
                 <div className="item2">12</div>
             </div> */}
 
-            <div className="container">
+            {/* <div className="container">
                 <header className="common header">Header</header>
-                <body>
-                    <main className="common main">Main</main>
-                    <aside className="common aside">Aside</aside>
+                <main className="common main">
+                    <Box className="section_common section1 ">Box</Box>
+                    <section className="section_common section2">section</section>
+                    <section className="section_common section3">section</section>
+                    <aside className="section_commonsection_common aside">Aside</aside>
                     <footer className="common footer">Footer</footer>
-                </body>
-            </div>
+                </main>
+            </div> */}
         </>
     )
 }
 
 export default App
 const BoxStyle2 = {
-    transType: [{ move: '0.5s ease 1' }, { scale: '0.5s ease 1' }],
+    // transType: [{ move: '0.5s ease 1' }, { scale: '0.5s ease 1' }],
     userSelect: 'none',
     color: 'black',
     fontSize: '20px',
@@ -415,24 +420,22 @@ const BoxAnimation2 = {
 const commonStyle = { one: '0.5s ease 1' }
 
 const BoxStyle4 = {
-    base: {
-        userSelect: 'none',
-        color: 'black',
-        fontSize: '20px',
-        border: '1px solid black',
-        outline: '0px',
-        width: '500px',
-        margin: '30px auto 0 30px',
-        backgroundColor: 'white',
-        justifyContent: 'end',
-        padding: '0 20px',
-        boxSizing: 'border-box',
-        textAlign: 'right',
-        transition: [`color ${commonStyle.one}`, `background-color ${commonStyle.one}`],
-        cursor: 'pointer',
-        whiteSpace: 'nowrap',
-        position: 'relative',
-    },
+    userSelect: 'none',
+    color: 'black',
+    fontSize: '20px',
+    border: '1px solid black',
+    outline: '0px',
+    width: '500px',
+    margin: '30px auto 0 30px',
+    backgroundColor: 'white',
+    justifyContent: 'end',
+    padding: '0 20px',
+    boxSizing: 'border-box',
+    textAlign: 'right',
+    transition: [`color ${commonStyle.one}`, `background-color ${commonStyle.one}`],
+    cursor: 'pointer',
+    whiteSpace: 'nowrap',
+    position: 'relative',
 
     keyframes: {
         move: {
@@ -516,46 +519,3 @@ const BoxStyle4 = {
         },
     },
 }
-
-//   pseudo: [
-//         {
-//             selector: 'hover',
-//             color: 'green',
-//             backgroundColor: 'black',
-//         },
-//         {
-//             selector: 'after',
-//             position: 'absolute',
-//             content: '"hello"',
-//             left: '30px',
-//             top: '3px',
-//             fontSize: '16px',
-//             transitions: [{ 'left top fontSize': '0.5 ease' }],
-//         },
-//         {
-//             selector: 'before',
-//             color: 'red',
-//             position: 'absolute',
-//             content: '"Click to Change Opacity"',
-//             right: '-220px',
-//             top: '0px',
-//         },
-//     ],
-
-//  pseudo: [
-//             {
-//                 selector: 'hover',
-//                 backgroundColor: 'red',
-//                 color: 'white',
-//             },
-//             {
-//                 selector: 'after',
-//                 fontSize: '12px',
-//                 left: '460px',
-//                 top: '6px',
-//             },
-//             {
-//                 selector: 'before',
-//                 opacity: '0',
-//             },
-//         ],

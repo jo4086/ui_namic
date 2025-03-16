@@ -13,12 +13,12 @@ const filterPropsCore = (config) => {
     const { keyframeProps, mediaProps, objectProps, stringProps, functionProps } = filterPropsType(props)
 
     // 1. 스타일 필터링
-    const { validCss, validDisplay, strings } = filterStyleProps({ stringProps, type, display })
+    const { validCss, patchDisplay, strings } = filterStyleProps({ stringProps, type, display })
 
     const { pseudoProps, nonPseudoProps, isDynamic } = filterPseudoProps({ objectProps, type, pseudo })
 
     const styles = {
-        ...(validDisplay && { display: validDisplay }),
+        ...(patchDisplay && { display: patchDisplay }),
         ...(validCss || {}),
         ...(pseudoProps || {}),
         ...(mediaProps || {}),

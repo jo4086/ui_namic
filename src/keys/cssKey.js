@@ -1,4 +1,12 @@
-export const pseudoElementKeys = ['before', 'after', 'first-line', 'first-letter', 'placeholder', 'selection', 'marker']
+export const pseudoElementKeys = [
+    'before', // 가상선택자들
+    'after',
+    'first-line',
+    'first-letter',
+    'placeholder',
+    'selection',
+    'marker',
+]
 
 // flex 속성
 export const flexPropsKeys = [
@@ -8,7 +16,6 @@ export const flexPropsKeys = [
     'alignItems',
     'gap',
 ]
-
 
 // 그리드 박스 관련 속성
 export const gridPropsKeys = [
@@ -21,7 +28,16 @@ export const gridPropsKeys = [
 ]
 
 // 테이블 속성
-export const tablePropsKeys = ['colspan', 'rowspan', 'cellSpacing', 'cellPadding', 'borderCollapse', 'captionSide', 'emptyCells', 'tableLayout']
+export const tablePropsKeys = [
+    'colspan', //테이블 속성
+    'rowspan',
+    'cellSpacing',
+    'cellPadding',
+    'borderCollapse',
+    'captionSide',
+    'emptyCells',
+    'tableLayout',
+]
 
 // 공통 속성
 export const commonPropsKeys = [
