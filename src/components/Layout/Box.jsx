@@ -2,7 +2,17 @@
 
 import { StyledBox } from './LayoutStyle'
 import { filterPropsCore } from '../../core'
-import { useTriggerDynamicClass } from '../../utils'
+import displayValidate from '../../utils/validators/display.validate.js'
+
+
+
+
+
+const Boxs = ({ dynamicType=undefined, ds=null, display='flex', type='div', children, ...props }) => {
+	const 	
+
+}
+
 
 const Box = ({ dynamicType = undefined, display = 'flex', type = 'div', pseudo = undefined, children, ...props }) => {
     const { dynamicClass, filter } = filterPropsCore({ display, type, props, pseudo, dynamicType })
@@ -22,6 +32,7 @@ const Box = ({ dynamicType = undefined, display = 'flex', type = 'div', pseudo =
 
 export default Box
 
+// const Boxs = 
 
 // const BoxStyle4 = {
 //     userSelect: 'none',
