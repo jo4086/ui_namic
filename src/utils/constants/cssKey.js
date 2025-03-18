@@ -1,21 +1,30 @@
-const flexPropsKeys = [
-    'display', // 반드시 'flex'여야 유효
+export const flexPropsKeys = [
+    'display', // flex
     'flexFlow',
-    'flexDirecwtion',
+    'flexDirection',
     'flexWrap',
     'justifyContent',
     'alignContent',
     'alignItems',
+    'alignSelf',
+    'justifySelf', // ✔ 일부 지원
+    'placeItems', // ✔ 축약형
+    'placeContent', // ✔ 축약형
+    'placeSelf', // ✔ 축약형
     'gap',
 ]
+
 // 그리드 박스 관련 속성
-const gridPropsKeys = [
+export const gridPropsKeys = [
     'display', // 반드시 'grid'여야 유효
     'gridTemplateColumns',
     'gridTemplateRows',
     'gridGap',
     'alignItems',
     'justifyContent',
+    'justifyItems',
+    'placeItems',
+    'placeContent',
 
     'gridTemplateRows',
     'gridTemplateColumns',
@@ -28,10 +37,9 @@ const gridPropsKeys = [
     'gridAutoRows',
     'gridAutoColumns',
     'gridAutoFlow',
-    
 ]
 
-const tablePropsKeys = [
+export const tablePropsKeys = [
     'colspan', // 테이블 속성
     'rowspan',
     'cellSpacing',
@@ -42,7 +50,7 @@ const tablePropsKeys = [
     'tableLayout',
 ]
 
-const flexItems = [
+export const flexItems = [
     'order', // flex 자식 속성들
     'flex',
     'flexGrow',
@@ -51,10 +59,23 @@ const flexItems = [
     'alignSelf',
 ]
 
-const gridItems = []
+export const gridItems = [
+    'gridRowStart', // grid 자식 속성들
+    'gridRowEnd',
+    'gridRow',
+    'gridColumnStart',
+    'gridColumnEnd',
+    'gridColumn',
+    'gridArea',
+    'alignSelf',
+    'justifySelf',
+    'placeSelf',
+    'order',
+    'zIndex',
+]
 
 // 공통 속성
-const commonPropsKeys = [
+export const commonPropsKeys = [
     'padding', // 공통속성
     'paddingLeft',
     'paddingRight',
@@ -82,7 +103,7 @@ const commonPropsKeys = [
     'aspectRatio',
     'boxSizing',
     'outline',
-    'tabindex',
+    'tabIndex',
     'caretColor',
     'pointerEvents',
     'left',
@@ -113,4 +134,5 @@ const commonPropsKeys = [
     'willChange',
     'all',
     ...flexItems,
+    ...gridItems,
 ]

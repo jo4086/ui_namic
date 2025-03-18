@@ -2,37 +2,38 @@
 
 import { StyledBox } from './LayoutStyle'
 import { filterPropsCore } from '../../core'
-import displayValidate from '../../utils/validators/display.validate.js'
+import displayValidator from '../../utils/validators/display.validator.js'
+import corePropsFilter from '../../core/core.props-filter.js'
 
+const Box = ({ dynamicType = undefined, dynamicStyle = {}, display = 'flex', type = 'div', children, ...props }) => {
+    corePropsFilter({ type, display, dynamicType, props, dynamicStyle })
+    //  const { displayCategory, patchDisplay } = displayValidate(type, display)
 
+    //  console.log('get-display:', displayCategory)
+    //  console.log('patchDisplayCategory:', patchDisplay)
 
-
-
-const Boxs = ({ dynamicType=undefined, ds=null, display='flex', type='div', children, ...props }) => {
-	const 	
-
+    return <StyledBox>{children}</StyledBox>
 }
 
+// const Box = ({ dynamicType = undefined, display = 'flex', type = 'div', pseudo = undefined, children, ...props }) => {
+//     const { dynamicClass, filter } = filterPropsCore({ display, type, props, pseudo, dynamicType })
 
-const Box = ({ dynamicType = undefined, display = 'flex', type = 'div', pseudo = undefined, children, ...props }) => {
-    const { dynamicClass, filter } = filterPropsCore({ display, type, props, pseudo, dynamicType })
-
-     const { isTriggered, handleDynamicEvent } = useTriggerDynamicClass(dynamicClass)
-    return (
-       <StyledBox
-          as={type}
-          {...filter}
-          className={`${props.className || ''} ${isTriggered ? 'dynamic' : ''}`.trim()}
-          {...(dynamicType ? { [dynamicType]: handleDynamicEvent } : {})} // 동적 이벤트 바인딩
-       >
-          {children}
-       </StyledBox>
-    )
-}
+//     const { isTriggered, handleDynamicEvent } = useTriggerDynamicClass(dynamicClass)
+//     return (
+//         <StyledBox
+//             as={type}
+//             {...filter}
+//             className={`${props.className || ''} ${isTriggered ? 'dynamic' : ''}`.trim()}
+//             {...(dynamicType ? { [dynamicType]: handleDynamicEvent } : {})} // 동적 이벤트 바인딩
+//         >
+//             {children}
+//         </StyledBox>
+//     )
+// }
 
 export default Box
 
-// const Boxs = 
+// const Boxs =
 
 // const BoxStyle4 = {
 //     userSelect: 'none',

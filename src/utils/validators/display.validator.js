@@ -57,7 +57,7 @@ const patchDisplayCategory = (display) => {
 }
 
 /**
- * @function displayValidate
+ * @function displayValidator
  * - Validates the given display value for the specified tag type and determines its display category.
  * - If the type is a table-related tag, uses a predefined display mapping instead of the provided value.
  *
@@ -68,19 +68,17 @@ const patchDisplayCategory = (display) => {
  * @returns {{ displayCategory: string, patchDisplay: string }}
  * - An object containing the display category and the validated display value.
  */
-function displayValidate(type, display) {
+function displayValidator(type, display) {
     const getDisplay = tableTagSet.has(type) ? tableDisplayMap[type] : display
 
     validDisplay(getDisplay, type)
 
     const displayCategory = patchDisplayCategory(getDisplay)
 
-    if (process.env.REACT_APP_ENV === 'development') {
-        console.log('get-display:', getDisplay)
-        console.log('patchDisplayCategory:', displayCategory)
-    }
+    // console.log('get-display:', getDisplay)
+    // console.log('patchDisplayCategory:', displayCategory)
 
     return { displayCategory, patchDisplay: getDisplay }
 }
 
-export default displayValidate
+export default displayValidator
