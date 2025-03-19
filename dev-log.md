@@ -6,8 +6,6 @@
 
 변하지 않는 **맵/리스트 구조**를 따로 관리
 
-![](./md_image/2025-03-20-00-14-23.png)
-
 -   위치: `/src/constants`
 -   파일:
     -   `index.js`: `lists.js`, `maps.js`의 `export`경로 **and** `lists.js, maps.js`을 조합한 새로운 맵 `export`
@@ -16,10 +14,15 @@
 -   목적: **가독성 향상 + 재사용 용이 + 유지보수 용이**
 
 <details> 
+<summary> ${\textsf{\color{green}{directory image view}}}$ </summary>
+
+![](./md_image/2025-03-20-00-14-23.png)
+
+</details>
+
+<details> 
 <summary> ${\textsf{\color{magenta}{e.g., code view}}}$ </summary>
 
-> ![](./md_image/2025-03-20-00-14-23.png)
->
 > <details>
 > <summary> ${\textsf{\color{magenta}{index.js}}}$ </summary>
 >
