@@ -18,20 +18,24 @@ const keySet = new Set(['dynamic', 'keyframes', 'media', 'pseudo'])
 
 const corePropsFilter = (config) => {
     const { display, type, dynamicStyle: styleProps, props: spreadProps, dynamicType } = config
-    console.log('styleProps:', styleProps)
-    console.log('spreadProps:', spreadProps)
 
-    const { displayCategory, patchDisplay } = displayValidator(type, display)
+    const mergeProps = { ...spreadProps, ...styleProps }
 
-    // cssKeyValidator(displayCategory)
+    const { displayGroup, patchDisplay } = displayValidator(type, display)
 
-    const { normalProps, mediaProps, keyFramesProps, dynamicProps, pseudoProps } = filterUtils.stylesFilter(styleProps, displayCategory)
+    const { primitiveProps, referenceProps } = filterUtils.dataTypeFilter(mergeProps)
 
-    const { pseudoClasses, pseudoElements } = filterUtils.pseudoFilter(pseudoProps)
-    console.log('result:', pseudoClasses, pseudoElements)
+    // filterUtils.propsTypeFilter(mergeProps, displayGroup)
 
-    const dynamis = filterUtils.dynamicFilter(dynamicProps)
-    console.log('dynamis', dynamis)
+    // cssKeyValidator(displayGroup)
+
+    // const { normalProps, mediaProps, keyFramesProps, dynamicProps, pseudoProps } = filterUtils.stylesFilter(styleProps, displayGroup)
+
+    // const { pseudoClasses, pseudoElements } = filterUtils.pseudoFilter(pseudoProps)
+    // console.log('result:', pseudoClasses, pseudoElements)
+
+    // const dynamis = filterUtils.dynamicFilter(dynamicProps)
+    // console.log('dynamis', dynamis)
 
     // const isDynamicType = Boolean(dynamicType)
     // const onEvent = props[dynamicType]
@@ -39,7 +43,7 @@ const corePropsFilter = (config) => {
 
     // const { functionProps, objectProps, keyframesProps, mediaProps, stringProps } = propsFilterType(props)
 
-    // console.log('get-display:', displayCategory)
+    // console.log('get-display:', displayGroup)
     // console.log('patchDisplayCategory:', patchDisplay)
 }
 

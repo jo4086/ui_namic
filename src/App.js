@@ -2,16 +2,33 @@ import Box from './components/Layout/Box'
 import { useState, useEffect } from 'react'
 import NavButton from './components/Navigate/NavButton'
 import './css/test.css'
+import { Box as A } from '@mui/material'
 
 function App() {
     const [value, setValue] = useState('')
     const [showPage, setShowPage] = useState(false)
+    const spreadMui = {
+        m: 5,
+        bgcolor: 'yellow',
+    }
 
     return (
         <>
-            <Box className="Container" dynamicStyle={BoxStyle4} dynamicType type="div" display="flex" {...spreadStyle}>
+            <Box>hello</Box>
+            {/* <Box className="Container" onClick={() => setShowPage((prev) => !prev)} dynamicStyle={BoxStyle4} dynamicType type="div" display="flex" {...spreadStyle}>
                 hello
-            </Box>
+            </Box> */}
+            <A {...spreadMui} sx={{ m: 10, bgcolor: 'green' }}>
+                mui Box1
+            </A>
+            <A sx={{ m: 10, bgcolor: 'pink' }} {...spreadMui}>
+                mui Box2
+            </A>
+            <A {...spreadMui}>mui Box3</A>
+            <A sx={{ m: 10 }} {...spreadMui}>
+                mui Box4
+            </A>
+            <A style={{ margin: '80px' }}> mui Box3</A>
         </>
     )
 }
@@ -28,15 +45,41 @@ const spreadStyle = {
     outline: '0px',
     width: '500px',
     margin: '30px auto 0 30px',
-    backgroundCoe1rlor: 'white',
+    backgroundColor: 'white',
     justifyContent: 'end',
     padding: '0 20px',
     boxSizing: 'border-box',
     textAlign: 'right',
+    // transition: 'color 0.5s ease 1',
     transition: [`color ${commonStyle.one}`, `background-color ${commonStyle.one}`],
     cursor: 'pointer',
     whiteSpace: 'nowrap',
     position: 'relative',
+    media: {
+        down: [
+            { max: 600, width: '200px', height: '50px' },
+            { max: 959, width: '300px', height: '100px' },
+        ],
+        down: [
+            { min: 960, width: '200px', height: '50px' },
+            { min: 1279, width: '300px', height: '100px' },
+        ],
+    },
+
+    pseudo: {
+        hover: {
+            color: 'green',
+            backgroundColor: 'black',
+        },
+        after: {
+            position: 'absolute',
+            content: '"hello"',
+            left: '30px',
+            top: '3px',
+            fontSize: '16px',
+            // transition: [`left ${commonStyle.one}`, `top ${commonStyle.one}`, `fontSize ${commonStyle.one}`],
+        },
+    },
 }
 
 const BoxStyle4 = {
@@ -47,12 +90,12 @@ const BoxStyle4 = {
     outline: '0px',
     width: '500px',
     margin: '30px auto 0 30px',
-    backgroundCoe1rlor: 'white',
+    backgroundColor: 'white',
     justifyContent: 'end',
     padding: '0 20px',
     boxSizing: 'border-box',
     textAlign: 'right',
-    transition: [`color ${commonStyle.one}`, `background-color ${commonStyle.one}`],
+    // transition: [`color ${commonStyle.one}`, `background-color ${commonStyle.one}`],
     cursor: 'pointer',
     whiteSpace: 'nowrap',
     position: 'relative',
@@ -104,7 +147,7 @@ const BoxStyle4 = {
             left: '30px',
             top: '3px',
             fontSize: '16px',
-            transition: [`left ${commonStyle.one}`, `top ${commonStyle.one}`, `fontSize ${commonStyle.one}`],
+            // transition: [`left ${commonStyle.one}`, `top ${commonStyle.one}`, `fontSize ${commonStyle.one}`],
         },
         before: {
             color: 'red',

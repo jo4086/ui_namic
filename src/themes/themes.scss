@@ -1,0 +1,16 @@
+$theme-colors: (
+  'primary': #1976d2,
+  'success': #4caf50,
+  'error':   #f44336,
+  'info':    #2196f3,
+  'warning': #ffc107
+);
+
+@each $name, $color in $theme-colors {
+  :root {
+    --color-#{$name}: #{$color};
+    --color-#{$name}-light: lighten($color, 15%);
+    --color-#{$name}-dark: darken($color, 15%);
+    --color-#{$name}-hover: lighten($color, 5%);
+  }
+}

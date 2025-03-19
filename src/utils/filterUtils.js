@@ -1,11 +1,58 @@
 import FormatUtils from './formatUtils'
-import { pseudoClassesMap, pseudoElementsMap } from './constants/pseudo.constant'
+import { pseudoClassList, pseudoElementList, onEventList } from './constants'
+import { flexCssList, gridCssList, tableCssList, commonCssList, displayListMap } from './constants'
+
 const keySet = new Set(['dynamic', 'keyframes', 'media', 'pseudo'])
 
 class FilterUtils {
+    dataTypeFilter(props) {
+        const primitiveProps = {}
+        const referenceProps = {}
+
+        const transitionType = new Set(['transition'])
+
+        for (const [key, value] of Object.entries(props)) {
+            let formatValue
+            if (transitionType.has(key) && typeof value !== 'string') {
+                formatValue = value.join(', ')
+            } else {
+                formatValue = value
+            }
+
+            if (typeof formatValue === 'string') {
+                primitiveProps[key] = formatValue
+            } else {
+                referenceProps[key] = formatValue
+            }
+        }
+
+        return { primitiveProps, referenceProps }
+    }
+    propsTypeFilter(props, displayGroup) {
+        console.log('%cprops:', 'font-size:1.3rem', props)
+        console.log('%cdisplay:', 'font-size:1.3rem', displayGroup)
+        const selectedList = displayListMap[displayGroup]
+        // console.log(commonCssList)
+        // console.log(selectedList)
+        // const a = `${display}CssList`
+        // console.log('a:', a)
+        // const displayCssSet = new Set(`${display}CssList`)
+
+        // console.log('displayCssSet:', displayCssSet)
+        // console.log('newDisSet:', newDisSet)
+        const primitiveProps = {}
+        const referenceProps = {}
+
+        for (const [key, value] of Object.entries(props)) {
+            console.log('key:', key)
+            // console.log('value:', value)
+            console.log('typeof(value):', typeof value)
+        }
+
+        console.log('props:', props)
+    }
+
     stylesFilter(styleObj, display) {
-        console.group('stylesFilter')
-        console.log(display)
         const dynamicProps = {}
         const keyFramesProps = {}
         const mediaProps = {}
@@ -55,17 +102,17 @@ class FilterUtils {
             const pseudoProps = styleObj?.pseudoProps
             if (!!pseudoProps) {
                 const formatPseudo = this.pseudoFilter(pseudoProps)
-                console.log('formatPesudo:', formatPseudo)
+                // console.log('formatPesudo:', formatPseudo)
                 styleObj['pseudoProps'] = formatPseudo
             }
 
-            console.log('styleObj:', styleObj)
+            // console.log('styleObj:', styleObj)
             return { dynamic: styleObj }
         }
     }
 
     pseudoFilter(styleObj) {
-        console.log(styleObj)
+        // console.log(styleObj)
         if (!styleObj) {
             return
         }
@@ -84,8 +131,8 @@ class spreadFilter {}
 
 class filterHelper {
     static splitPseudoStyles = (object) => {
-        const pseudoClassSet = new Set(pseudoClassesMap)
-        const pseudoElementSet = new Set(pseudoElementsMap)
+        const pseudoClassSet = new Set(pseudoClassList)
+        const pseudoElementSet = new Set(pseudoElementList)
 
         const pseudoClasses = {}
         const pseudoElements = {}

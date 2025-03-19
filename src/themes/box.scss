@@ -1,0 +1,22 @@
+@import './themes.scss';
+
+.ui_namic_box {
+    padding: 10px;
+    border-radius: 4px;
+    background-color: var(--color-light);
+
+    &.variant_color_success {
+        background-color: var(--color-success);
+        color: var(--text-success);
+    }
+
+    &.variant_color_error {
+        background-color: var(--color-error);
+        color: var(--text-error);
+    }
+
+    &.variant_color_info {
+        background-color: var(--color-info);
+        color: var(--text-info);
+    }
+}
