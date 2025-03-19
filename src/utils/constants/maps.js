@@ -1,6 +1,6 @@
-/** INDEX
- * 1. displayGroupMap
- * 2. tableDisplayMap
+/** INDEX ${name}Map
+ * displayGroup
+ * tableDisplay
  */
 
 export const displayGroupMap = {
