@@ -1,20 +1,6 @@
 // core.props-filter.js
 import displayValidator from '../utils/validators/display.validator'
-import cssKeyValidator from '../utils/validators/cssKey.validator'
-import propsFilterType from '../utils/filters/props.filter-type'
 import filterUtils from '../utils/filterUtils'
-
-// import filterPseudoProps from '../utils/filter_pseudoProps.js'
-// import filterStyleProps from '../utils/filter_styleProps.js'
-// import filterPropsType from '../utils/filter_propsType.js'
-
-const configs = ['display', 'type', 'dynamic', 'dynamicType', 'props', 'keyframes', 'media', 'pseudo', '']
-
-/**
- * @prop {object}
- *  */
-
-const keySet = new Set(['dynamic', 'keyframes', 'media', 'pseudo'])
 
 const corePropsFilter = (config) => {
     const { display, type, dynamicStyle: styleProps, props: spreadProps, dynamicType } = config
@@ -23,28 +9,27 @@ const corePropsFilter = (config) => {
 
     const { displayGroup, patchDisplay } = displayValidator(type, display)
 
-    const { primitiveProps, referenceProps } = filterUtils.dataTypeFilter(mergeProps)
+    const result = filterUtils.splitPropsByType(mergeProps, displayGroup)
 
-    // filterUtils.propsTypeFilter(mergeProps, displayGroup)
+    const hasDynamicStyle = Boolean(result?.styleProps?.dynamic)
+    const hasDynamicType = Boolean(dynamicType)
 
-    // cssKeyValidator(displayGroup)
+    const onEvent = mergeProps[dynamicType] || null
+    const dynamicTrigger = hasDynamicStyle && hasDynamicType
 
-    // const { normalProps, mediaProps, keyFramesProps, dynamicProps, pseudoProps } = filterUtils.stylesFilter(styleProps, displayGroup)
+    const dynamicClass = { dynamicTrigger, dynamicType, onEvent }
+    const style = {
+        ...result.styleProps,
+    }
+    const other = {
+        ...result.onEventProps,
+        ...result.normalProps,
+    }
 
-    // const { pseudoClasses, pseudoElements } = filterUtils.pseudoFilter(pseudoProps)
-    // console.log('result:', pseudoClasses, pseudoElements)
+    // console.log('style:', style)
+    // console.log('other:', other)
 
-    // const dynamis = filterUtils.dynamicFilter(dynamicProps)
-    // console.log('dynamis', dynamis)
-
-    // const isDynamicType = Boolean(dynamicType)
-    // const onEvent = props[dynamicType]
-    // const value = props?.value
-
-    // const { functionProps, objectProps, keyframesProps, mediaProps, stringProps } = propsFilterType(props)
-
-    // console.log('get-display:', displayGroup)
-    // console.log('patchDisplayCategory:', patchDisplay)
+    return { style, other, dynamicClass }
 }
 
 export default corePropsFilter

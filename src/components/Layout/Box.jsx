@@ -5,12 +5,15 @@ import { filterPropsCore } from '../../core'
 import displayValidator from '../../utils/validators/display.validator.js'
 import corePropsFilter from '../../core/core.props-filter.js'
 
-const Box = ({ dynamicType = undefined, dynamicStyle = {}, display = 'flex', type = 'div', children, ...props }) => {
-    corePropsFilter({ type, display, dynamicType, props, dynamicStyle })
-    //  const { displayCategory, patchDisplay } = displayValidate(type, display)
+const classNameSet = new Set(['className'])
 
-    //  console.log('get-display:', displayCategory)
-    //  console.log('patchDisplayCategory:', patchDisplay)
+const Box = ({ dynamicType = undefined, dynamicStyle = {}, display = 'flex', type = 'div', children, ...props }) => {
+    const { style, other, dynamicClass } = corePropsFilter({ type, display, dynamicType, props, dynamicStyle })
+    console.log('other:', other)
+
+    const filtered = Object.fromEntries(Object.entries(other).filter(([key]) => !classNameSet.has(key)))
+
+    console.log('filtered:', filtered)
 
     return <StyledBox>{children}</StyledBox>
 }

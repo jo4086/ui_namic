@@ -14,11 +14,15 @@ function App() {
 
     return (
         <>
-            <Box>hello</Box>
-            {/* <Box className="Container" onClick={() => setShowPage((prev) => !prev)} dynamicStyle={BoxStyle4} dynamicType type="div" display="flex" {...spreadStyle}>
+            {/* <Box>hello</Box> */}
+            <Box className="Container" onClick={() => setShowPage((prev) => !prev)} dynamicStyle={BoxStyle4} dynamicType="onClick" type="div" display="flex" {...spreadStyle}>
                 hello
-            </Box> */}
-            <A {...spreadMui} sx={{ m: 10, bgcolor: 'green' }}>
+            </Box>
+            <Box type="div" display="flex" className="div_1" onClick={() => setShowPage((prev) => !prev)} dynamicType="onClick" {...BoxStyle4}>
+                Click to Apply Dynamic Style
+            </Box>
+
+            {/* <A {...spreadMui} sx={{ m: 10, bgcolor: 'green' }}>
                 mui Box1
             </A>
             <A sx={{ m: 10, bgcolor: 'pink' }} {...spreadMui}>
@@ -28,7 +32,7 @@ function App() {
             <A sx={{ m: 10 }} {...spreadMui}>
                 mui Box4
             </A>
-            <A style={{ margin: '80px' }}> mui Box3</A>
+            <A style={{ margin: '80px' }}> mui Box3</A> */}
         </>
     )
 }
@@ -77,7 +81,7 @@ const spreadStyle = {
             left: '30px',
             top: '3px',
             fontSize: '16px',
-            // transition: [`left ${commonStyle.one}`, `top ${commonStyle.one}`, `fontSize ${commonStyle.one}`],
+            transition: [`left ${commonStyle.one}`, `top ${commonStyle.one}`, `fontSize ${commonStyle.one}`],
         },
     },
 }
@@ -95,7 +99,7 @@ const BoxStyle4 = {
     padding: '0 20px',
     boxSizing: 'border-box',
     textAlign: 'right',
-    // transition: [`color ${commonStyle.one}`, `background-color ${commonStyle.one}`],
+    transition: [`color ${commonStyle.one}`, `background-color ${commonStyle.one}`],
     cursor: 'pointer',
     whiteSpace: 'nowrap',
     position: 'relative',
@@ -147,7 +151,7 @@ const BoxStyle4 = {
             left: '30px',
             top: '3px',
             fontSize: '16px',
-            // transition: [`left ${commonStyle.one}`, `top ${commonStyle.one}`, `fontSize ${commonStyle.one}`],
+            transition: [`left ${commonStyle.one}`, `top ${commonStyle.one}`, `fontSize ${commonStyle.one}`],
         },
         before: {
             color: 'red',
