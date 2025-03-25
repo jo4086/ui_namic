@@ -1,21 +1,32 @@
 // Box.jsx
 
 import { StyledBox } from './LayoutStyle'
-import { filterPropsCore } from '../../core'
-import displayValidator from '../../utils/validators/display.validator.js'
-import corePropsFilter from '../../core/core.props-filter.js'
-
-const classNameSet = new Set(['className'])
+import propsFilterCore from '../../core/propsFilterCore.js'
+import useTriggerDynamicClass from '../../utils/trigger_dynamicClass.js'
 
 const Box = ({ dynamicType = undefined, dynamicStyle = {}, display = 'flex', type = 'div', children, ...props }) => {
-    const { style, other, dynamicClass } = corePropsFilter({ type, display, dynamicType, props, dynamicStyle })
-    console.log('other:', other)
+    // const response = corePropsFilter({ type, display, dynamicType, props, dynamicStyle })
+    // console.log(response)
 
-    const filtered = Object.fromEntries(Object.entries(other).filter(([key]) => !classNameSet.has(key)))
+    const { style, other, className, dynamicTrigger, patchDisplay } = propsFilterCore({ type, display, dynamicType, props, dynamicStyle })
 
-    console.log('filtered:', filtered)
+    const { isTriggered, handleDynamicEvent } = useTriggerDynamicClass(dynamicTrigger)
 
-    return <StyledBox>{children}</StyledBox>
+    // console.log('isTriggered:', isTriggered)
+    // console.log('🔄 훅 연동 isTriggered:', isTriggered)
+    // console.groupEnd()
+
+    return (
+        <StyledBox
+            as={type} // 태그 교체
+            className={`${className || ''} ${isTriggered ? 'dynamic' : ''}`.trim()}
+            {...other}
+            $style={style}
+            {...(dynamicType ? { [dynamicType]: handleDynamicEvent } : {})}
+        >
+            {children}
+        </StyledBox>
+    )
 }
 
 // const Box = ({ dynamicType = undefined, display = 'flex', type = 'div', pseudo = undefined, children, ...props }) => {

@@ -1,9 +1,9 @@
 import { useState, useCallback } from 'react'
 
-const useTriggerDynamicClass = (dynamicClass) => {
+const useTriggerDynamicClass = (dynamicTrigger) => {
     const [isTriggered, setIsTriggered] = useState(false)
 
-    const { dynamicType, onEvent } = dynamicClass
+    const { dynamicType, onEvent } = dynamicTrigger
 
     // 이벤트를 처리하고 즉시 결과를 반영
     const handleDynamicEvent = useCallback(
@@ -25,7 +25,7 @@ const useTriggerDynamicClass = (dynamicClass) => {
                 onEvent(event)
             }
         },
-        [dynamicType, onEvent],
+        [dynamicType, onEvent]
     )
 
     return { isTriggered, handleDynamicEvent }

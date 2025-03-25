@@ -12,15 +12,22 @@ function App() {
         bgcolor: 'yellow',
     }
 
+    // console.group('연동시작')
+    // console.log('📍 onChange 이벤트발생')
+    // console.log('📍 이벤트발생 useState:', showPage)
+
     return (
         <>
             {/* <Box>hello</Box> */}
-            <Box className="Container" onClick={() => setShowPage((prev) => !prev)} dynamicStyle={BoxStyle4} dynamicType="onClick" type="div" display="flex" {...spreadStyle}>
-                hello
-            </Box>
-            <Box type="div" display="flex" className="div_1" onClick={() => setShowPage((prev) => !prev)} dynamicType="onClick" {...BoxStyle4}>
+            {/* <Box className="Container" onClick={() => setShowPage((prev) => !prev)} dynamicStyle={BoxStyle4} dynamicType="onClick" type="div" display="flex" {...spreadStyle}>
+                hello, Click to Apply Dynamic Style
+            </Box> */}
+
+            <Box type="input" value={value} onChange={(e) => setValue(e.target.value)} dynamicType="onChange" dynamicStyle={BoxStyle4} className="input" />
+
+            {/* <Box type="div" display="flex" className="div_1" onClick={() => setShowPage((prev) => !prev)} dynamicType="onClick" {...BoxStyle4}>
                 Click to Apply Dynamic Style
-            </Box>
+            </Box> */}
 
             {/* <A {...spreadMui} sx={{ m: 10, bgcolor: 'green' }}>
                 mui Box1
@@ -108,16 +115,16 @@ const BoxStyle4 = {
         move: {
             duration: '3s',
             iteration: 1,
-            timingFunction: 'ease',
+            easing: 'ease',
             percent: {
-                0: { transform: 'translateX(0%)', opacity: 1, easing: 'ease-in' },
+                0: { transform: 'translateX(0%)', opacity: 1, easing: 'ease-in', backgroundColor: 'gray' },
                 15: { transform: 'translateX(50%)', opacity: 0, easing: 'ease-in-out' },
                 70: { transform: 'translateX(75%)', opacity: 0.5, easing: 'linear' },
                 100: { transform: 'translateX(50%)', opacity: 0, cursor: 'default', easing: 'ease-out' },
             },
         },
         scale: {
-            animation: '3s 5 ease-in',
+            animation: '3s ease-in 5',
             percent: {
                 0: { transform: 'scale(1)' },
                 100: { transform: 'scale(1.5)' },
@@ -183,6 +190,21 @@ const BoxStyle4 = {
             before: {
                 opacity: '0',
             },
+        },
+
+        media: {
+            self: [
+                { min: 768, max: 1023, width: '200px', height: '50px' },
+                { min: 1024, max: 1279, width: '300px', height: '100px' },
+            ],
+            down: [
+                { max: 1023, width: '200px', height: '50px' },
+                { max: 1279, width: '300px', height: '100px' },
+            ],
+            up: [
+                { min: 768, width: '200px', height: '50px' },
+                { min: 1280, width: '300px', height: '100px' },
+            ],
         },
     },
 }

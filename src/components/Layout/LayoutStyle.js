@@ -1,8 +1,10 @@
 import styled from 'styled-components'
+// import styledCore from '../../core/style.core'
 import { styledCore } from '../../core'
 
 export const StyledBox = styled.div`
     ${(props) => (props.$styles ? styledCore(props.$styles) : '')}
+    ${(props) => (props.$style ? styledCore(props.$style) : '')}
 `
 
 const keyframes = [

@@ -100,3 +100,113 @@
 
 -   컴포넌트에 전달된 props를 기반으로 SASS 클래스 적용
 -   미리 정의된 클래스 구조:
+
+## 2025-03-25
+
+### 🔍 고민 내용
+
+#### 1. 디렉토리 구조 개편
+
+#### 2. keyframes 값을 스타일드 컴포넌트에 맞게 빌드하는 파일 작성
+
+
+
+```js
+function buildKeyframesBundle(keyframes) {
+    /**
+     * buildKeyframesBundle - Generates CSS animation and @keyframes from JS object input.
+     *
+     * 🔹 Main Function
+     *   - keyframesAnalyze
+     *
+     * 🔸 Sub Function
+     *   - exAnimation
+     *   - nonAnimation
+     *   - generateKeyframesCss
+     *
+     * 🔧 Assist Item
+     *   - animationPropertyList
+     *   - animationPropertySet
+     *   - easingSet
+     */
+
+    const exAnimation = (name, value) => {
+        const animation = `${name} ${value.animation}`
+
+        return animation
+    }
+
+    const nonAnimation = (name, value) => {
+        const animationProperty = {}
+
+        forEachObject(value, (innerKey, innerValue) => {
+            if (animationPropertySet.has(innerKey)) {
+                animationProperty[innerKey] = innerValue
+            }
+        })
+
+        const orderedValues = animationPropertyList.map((key) => animationProperty[key]).filter((value) => value !== undefined)
+
+        const animation = [name, ...orderedValues].join(' ')
+
+        return animation
+    }
+
+    const generateKeyframesCss = (obj) => {
+        const result = {}
+
+        forEachNestedObject(obj, (animationName, percent, styles) => {
+            const propertyArray = []
+
+            forEachObject(styles, (propKey, propValue) => {
+                let patchKey
+
+                if (easingSet.has(propKey)) {
+                    patchKey = 'animationTimingFunction'
+                } else {
+                    patchKey = propKey
+                }
+
+                const kebabKey = camelToKebab(patchKey)
+                propertyArray.push(`${kebabKey}: ${propValue};`)
+            })
+
+            const block = `    ${percent}% {\n        ${propertyArray.join('\n        ')}\n    }`
+
+            if (!result[animationName]) result[animationName] = []
+            result[animationName].push(block)
+        })
+
+        const patchResult = Object.entries(result)
+            .map(([name, blocks]) => `@keyframes ${name} {\n${blocks.join('\n')}\n}`)
+            .join('\n\n')
+
+        return patchResult
+    }
+
+    function keyframesAnalyze(obj) {
+        const animationArray = []
+        const patchKeyframes = {}
+
+        forEachObject(obj, (key, value) => {
+            const getAnimation = typeof value.animation === 'string' ? exAnimation(key, value) : nonAnimation(key, value)
+
+            animationArray.push(getAnimation)
+
+            patchKeyframes[key] = value.percent
+        })
+
+        const animation = 'animation: ' + animationArray.join(', ')
+        const css = generateKeyframesCss(patchKeyframes)
+
+        console.log('%cAnimation', 'font-weight:bold', '\n' + animation)
+        console.log('%cCSS', 'font-weight:bold', '\n' + css)
+
+        return { animation, css }
+    }
+
+    const { animation, css } = keyframesAnalyze(keyframes)
+
+    return { animation, css }
+}
+```

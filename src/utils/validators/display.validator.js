@@ -15,6 +15,7 @@
  * - Categorized mapping of CSS display values.
  * - e.g., 'flex' → ['flex', 'inline-flex']
  */
+
 import { tableTagList, displayGroupMap, displayList } from '../constants'
 import { tableDisplayMap } from '../constants'
 
@@ -27,11 +28,14 @@ const displaySet = new Set(displayList)
  *
  * @param {string} display
  * - The CSS display value to validate.
+ *
  * @param {string} type
  * - The HTML tag or element type.
+ *
  * @throws {Error}
  * - If the display value is invalid.
  */
+
 const validDisplay = (display, type) => {
     if (!displaySet.has(display)) {
         throw new Error(`Invalid display value "${display}" for type "${type}". Allowed values: ${[...displaySet].join(', ')}`)
@@ -44,9 +48,11 @@ const validDisplay = (display, type) => {
  *
  * @param {string} display
  * - The CSS display value to categorize.
+ *
  * @returns {string}
  * - The group name that includes the display value, or 'common' if none match.
  */
+
 const patchDisplayGroup = (display) => {
     for (const group in displayGroupMap) {
         if (displayGroupMap[group].includes(display)) return group
@@ -61,11 +67,14 @@ const patchDisplayGroup = (display) => {
  *
  * @param {string} type
  * - The HTML tag or element type.
+ *
  * @param {string} display
  * - The CSS display value to validate and categorize.
+ *
  * @returns {{ displayGroup: string, patchDisplay: string }}
  * - An object containing the display group and the validated display value.
  */
+
 function displayValidator(type, display) {
     const getDisplay = tableTagSet.has(type) ? tableDisplayMap[type] : display
 
