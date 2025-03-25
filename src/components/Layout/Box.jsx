@@ -5,8 +5,6 @@ import propsFilterCore from '../../core/propsFilterCore.js'
 import useTriggerDynamicClass from '../../utils/trigger_dynamicClass.js'
 
 const Box = ({ dynamicType = undefined, dynamicStyle = {}, display = 'flex', type = 'div', children, ...props }) => {
-    // const response = corePropsFilter({ type, display, dynamicType, props, dynamicStyle })
-    // console.log(response)
 
     const { style, other, className, dynamicTrigger, patchDisplay } = propsFilterCore({ type, display, dynamicType, props, dynamicStyle })
 

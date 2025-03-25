@@ -23,7 +23,7 @@ function App() {
                 hello, Click to Apply Dynamic Style
             </Box> */}
 
-            <Box type="input" value={value} onChange={(e) => setValue(e.target.value)} dynamicType="onChange" dynamicStyle={BoxStyle4} className="input" />
+            <Box type="input" value={value} onChange={(e) => setValue(e.target.value)} dynamicType="onChange" dynamicStyle={BoxStyle4} {...spreadStyle} className="input" />
 
             {/* <Box type="div" display="flex" className="div_1" onClick={() => setShowPage((prev) => !prev)} dynamicType="onClick" {...BoxStyle4}>
                 Click to Apply Dynamic Style
@@ -61,7 +61,6 @@ const spreadStyle = {
     padding: '0 20px',
     boxSizing: 'border-box',
     textAlign: 'right',
-    // transition: 'color 0.5s ease 1',
     transition: [`color ${commonStyle.one}`, `background-color ${commonStyle.one}`],
     cursor: 'pointer',
     whiteSpace: 'nowrap',

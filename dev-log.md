@@ -212,3 +212,38 @@ function buildKeyframesBundle(keyframes) {
     return { animation, css }
 }
 ```
+
+#### 3. transition 구조 고민
+
+현재 `transition`은 `String`으로 입력하는것과 `Array`에 하나씩 입력하는 구조를 지원
+
+<details>
+<summary> 현재 코드 </summary>
+
+```js
+const commonStyle = { one: '0.5s ease 1' }
+
+transition: 'color 3s ease-in 1',
+transition: [`color ${commonStyle.one}`, `background-color ${commonStyle.one}`],
+```
+
+</details>
+
+중복속성을 편하게 적기 위해서 줄이기위해 한 것인데 결과적으로 2번 모두 따로 적는 불상사가 발생
+
+그러므로 `Array`속에 객체를 두고 key이름은 `property` 값은 `value`로 두어
+
+같은 `value`들은 `property`에 한번에 적어서 동시에 관리하면서, 배열에 일반 문자열도 넣게끔 구조를 개조하여 유연성을 확보해보려고함
+
+여전히 `transition`에는 바로 `String`으로 써도 인식하지만 만약 `Array`형태일시 내부에 다시 객체와 스트링을 분석하고 재구조화하는 방향으로 설계하려고 함
+
+<details>
+<summary> 개선 코드 (미구현) </summary>
+
+```js
+transition: [{ property: 'color, backgroundColor', value: commonStyle.one }, `font-size 0.3s ease-in-out`]
+
+// result: transition: color 0.5s ease 1, background-color 0.5s ease 1, font-size 0.3s ease-in-out;
+```
+
+</details>

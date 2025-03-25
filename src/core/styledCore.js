@@ -1,6 +1,6 @@
 import { styleFromatter } from '../utils/formatUtils.js'
-import { camelToKebab } from '../utils/caseConverter.js'
 import { pseudoClassSet, pseudoElementSet } from '../constants/'
+import { camelToKebab } from '../utils/caseConverter.js'
 import { forEachObject, forEachNestedObject } from './utils/callback.js'
 
 const animationSet = new Set(['animation'])
@@ -10,34 +10,8 @@ const easingSet = new Set(['easing'])
 
 function styledCore(props) {
     const { dynamic, keyframes, media, pseudo, ...rest } = props
-    // console.log(media)
-
-    let dynamicString
-    let dynamicPseudo
-    let dynamicMedia
-    let dynamicKeyframes
-
-    function mediaDestructuring(props) {
-        const { self, down, up } = props
-        // console.log(self)
-        // console.log(down)
-        // console.log(up)
-    }
-
-    mediaDestructuring(media)
 
     buildKeyframesBundle(keyframes)
-
-    function dynamicDestructuring(dynamic) {
-        const { primitiveProps, referenceProps } = dataType(dynamic)
-
-        dynamicString = objectToCss(primitiveProps)
-    }
-
-    const isString = typeChecker(rest, { type: 'object' })
-
-    const string = objectToCss(rest)
-    dynamicKey(dynamic)
 }
 
 export default styledCore
@@ -45,7 +19,7 @@ export default styledCore
 function buildKeyframesBundle(keyframes) {
     /**
      * buildKeyframesBundle - Generates CSS animation and @keyframes from JS object input.
-     * 
+     *
      * 🔹 Main Function
      *   - keyframesAnalyze
      *
@@ -240,3 +214,33 @@ const pseudoType = (obj) => {
     const finalCSS = [baseCSS, keyframesCSS, pseudoCSS, dynamicCSS].join('\n')
 
     return finalCSS */
+
+/* 
+    
+    
+     let dynamicString
+    let dynamicPseudo
+    let dynamicMedia
+    let dynamicKeyframes
+
+    function mediaDestructuring(props) {
+        const { self, down, up } = props
+        // console.log(self)
+        // console.log(down)
+        // console.log(up)
+    }
+
+    mediaDestructuring(media)
+
+
+    function dynamicDestructuring(dynamic) {
+        const { primitiveProps, referenceProps } = dataType(dynamic)
+
+        dynamicString = objectToCss(primitiveProps)
+    }
+
+    const isString = typeChecker(rest, { type: 'object' })
+
+    const string = objectToCss(rest)
+    dynamicKey(dynamic)
+    */
