@@ -109,9 +109,11 @@
 
 #### 2. keyframes 값을 스타일드 컴포넌트에 맞게 빌드하는 파일 작성
 
-
-
 ```js
+const animationPropertyList = ['duration', 'easing', 'delay', 'iteration', 'direction', 'fillMode', 'playState']
+const animationPropertySet = new Set(animationPropertyList)
+const easingSet = new Set(['easing'])
+
 function buildKeyframesBundle(keyframes) {
     /**
      * buildKeyframesBundle - Generates CSS animation and @keyframes from JS object input.
