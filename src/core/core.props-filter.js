@@ -2,6 +2,8 @@
 import displayValidator from '../utils/validators/display.validator'
 import { transitionType, dataType, cssProps, propsGroup, formatting } from '../utils/propsFilterHelper'
 
+const cache = new WeakMap()
+
 const corePropsFilter = (config) => {
     const { display, type, dynamicStyle: styleProps, props: spreadProps, dynamicType } = config
 

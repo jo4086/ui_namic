@@ -217,12 +217,12 @@ function buildKeyframesBundle(keyframes) {
 
 현재 `transition`은 `String`으로 입력하는것과 `Array`에 하나씩 입력하는 구조를 지원
 
+변수값 코드: `const commonStyle = { one: '0.5s ease 1' }`
+
 <details>
 <summary> 현재 코드 </summary>
 
 ```js
-const commonStyle = { one: '0.5s ease 1' }
-
 transition: 'color 3s ease-in 1',
 transition: [`color ${commonStyle.one}`, `background-color ${commonStyle.one}`],
 ```

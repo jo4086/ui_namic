@@ -1,11 +1,11 @@
-// ..constants/maps.js
+// ../constants/maps.js
 
 /** INDEX
  * -- naming role `${name}Map` --
  * displayGroup
  * tableDisplay
- * displayListMap
- * displaySetMap
+ * displayList
+ * displaySet
  */
 
 import lists from './lists'

@@ -1,4 +1,4 @@
-// constants/index.js
+// ..constants/index.js
 
 export * from './lists'
 export * from './maps'
