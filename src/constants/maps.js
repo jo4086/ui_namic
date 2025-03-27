@@ -32,14 +32,14 @@ export const tableDisplayMap = {
 }
 
 export const displayListMap = {
-    common: lists.commonCssList,
+    base: lists.commonCssList,
     table: lists.tableCssList,
     flex: lists.flexCssList,
     grid: lists.gridCssList,
 }
 
 export const displaySetMap = {
-    common: sets.displayCommonSet,
+    base: sets.displayCommonSet,
     table: sets.displayTableSet,
     flex: sets.displayFlexSet,
     grid: sets.displayGridSet,

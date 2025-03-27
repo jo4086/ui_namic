@@ -1,7 +1,6 @@
 // ./styledCore.js
 
-
-import camelToKebab  from './utils/camelToKebab.js'
+import camelToKebab from './utils/camelToKebab.js'
 import { forEachObject, forEachNestedObject } from './utils/callback.js'
 
 const animationPropertyList = ['duration', 'easing', 'delay', 'iteration', 'direction', 'fillMode', 'playState']
@@ -11,7 +10,11 @@ const easingSet = new Set(['easing'])
 function styledCore(props) {
     const { dynamic, keyframes, media, pseudo, ...rest } = props
 
-    buildKeyframesBundle(keyframes)
+    console.log('rest:', rest)
+
+    const { animation, css } = buildKeyframesBundle(keyframes)
+    // console.log('animation:', animation)
+    // console.log('css:', css)
 }
 
 export default styledCore
@@ -103,8 +106,8 @@ function buildKeyframesBundle(keyframes) {
         const animation = 'animation: ' + animationArray.join(', ')
         const css = generateKeyframesCss(patchKeyframes)
 
-        console.log('%cAnimation', 'font-weight:bold', '\n' + animation)
-        console.log('%cCSS', 'font-weight:bold', '\n' + css)
+        // console.log('%cAnimation', 'font-weight:bold', '\n' + animation)
+        // console.log('%cCSS', 'font-weight:bold', '\n' + css)
 
         return { animation, css }
     }

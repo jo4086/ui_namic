@@ -3,6 +3,7 @@
 import React from 'react'
 import propsFilterCore from '../propsFilterCore'
 import useDynamicTrigger from '../utils/useDynamicTrigger'
+import styledCore from '../styledCore'
 
 // HTML5 void 요소들 (children 허용 X)
 const voidElements = new Set(['area', 'base', 'br', 'col', 'embed', 'hr', 'img', 'input', 'link', 'meta', 'param', 'source', 'track', 'wbr'])
@@ -14,6 +15,8 @@ const createItem = ({ type: defaultType = 'div', display: defaultDisplay = 'bloc
         const resolvedDynamicType = dynamicType || defaultDynamicType
         const mergedStyle = { ...defaultBaseStyle, ...dynamicStyle }
 
+        console.log('mergedStyle:', mergedStyle)
+
         const { style, other, className, dynamicTrigger, patchDisplay } = propsFilterCore({
             type: resolvedType,
             display: resolvedDisplay,
@@ -21,6 +24,10 @@ const createItem = ({ type: defaultType = 'div', display: defaultDisplay = 'bloc
             props: restProps,
             dynamicStyle: mergedStyle,
         })
+        console.log('style:', style)
+        console.log('other:', other)
+
+        styledCore(style)
 
         const { isTriggered, handleDynamicEvent } = useDynamicTrigger(dynamicTrigger)
         const Tag = resolvedType
@@ -31,10 +38,10 @@ const createItem = ({ type: defaultType = 'div', display: defaultDisplay = 'bloc
             ...(resolvedDynamicType ? { [resolvedDynamicType]: handleDynamicEvent } : {}),
         }
 
-        const renderVoidTag = () => <Tag {...baseProps} />
-        const renderValidTag = () => <Tag {...baseProps}>{children}</Tag>
+        const renderTagWithoutChildren = () => <Tag {...baseProps} />
+        const renderTagWithChildren = () => <Tag {...baseProps}>{children}</Tag>
 
-        return voidElements.has(resolvedType) ? renderVoidTag() : renderValidTag()
+        return voidElements.has(resolvedType) ? renderTagWithoutChildren() : renderTagWithChildren()
     }
 }
 

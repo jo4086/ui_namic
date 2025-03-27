@@ -1,27 +1,43 @@
 // ../constants/lists.js
 
-/** INDEX
- * -- naming rule: `${name}List` --
- * tableTag
- * display
- * onEvent
- * pseudoClass
- * pseudoElement
- * allPseudo
+/**
+ * 🔹 EXPORT STRUCTURE
+ * export const ${name} = { list, set }
  *
- * -- display group match css property --
- * flexCss
- * gridCss
- * tableCss
- * commonCss
+ * Includes:
+ * - tableTag
+ * - displayValue
+ * - pseudoClass
+ * - pseudoElement
+ * - allPseudo
+ * - onEventAll
  *
- * -- export default lists --
- * lists = { All List }
+ * - baseProperty
+ * - flexProperty
+ * - gridProperty
+ * - tableProperty
+ *
+ * - mergedBaseProperty
+ * - mergedFlexProperty
+ * - mergedGridProperty
+ * - mergedTableProperty
+ *
+ * 🔹 DEFAULT EXPORT
+ * export default propsMap = { all above }
+ *
+ * 💡 USAGE:
+ * import props from 'path'
+ *
+ * props.baseProperty.list
+ * props.mergedGridProperty.set
+ * props.onEventAll.list
  */
 
 export const tableTagList = ['table', 'caption', 'thead', 'tfoot', 'tbody', 'colgroup', 'tr', 'td', 'th', 'col']
 
-export const displayList = [
+export const tableTagSet = new Set(tableTagList)
+
+export const displayValueList = [
     'flex',
     'inline-flex',
     'grid',
@@ -43,120 +59,7 @@ export const displayList = [
     'table-caption',
 ]
 
-export const onEventList = [
-    // 마우스 이벤트
-    'onClick',
-    'onDoubleClick',
-    'onMouseDown',
-    'onMouseEnter',
-    'onMouseLeave',
-    'onMouseMove',
-    'onMouseOut',
-    'onMouseOver',
-    'onMouseUp',
-    'onContextMenu',
-
-    // 키보드 이벤트
-    'onKeyDown',
-    'onKeyPress',
-    'onKeyUp',
-
-    // 포커스 이벤트
-    'onFocus',
-    'onBlur',
-    'onFocusIn',
-    'onFocusOut',
-
-    // 폼 이벤트
-    'onChange',
-    'onInput',
-    'onInvalid',
-    'onSubmit',
-    'onReset',
-
-    // 터치 이벤트
-    'onTouchCancel',
-    'onTouchEnd',
-    'onTouchMove',
-    'onTouchStart',
-
-    // 드래그 이벤트
-    'onDrag',
-    'onDragEnd',
-    'onDragEnter',
-    'onDragExit',
-    'onDragLeave',
-    'onDragOver',
-    'onDragStart',
-    'onDrop',
-
-    // 휠 이벤트
-    'onWheel',
-
-    // 폼 전용 추가 이벤트
-    'onSelect',
-
-    // 복사/붙여넣기 이벤트
-    'onCopy',
-    'onCut',
-    'onPaste',
-
-    // 미디어 이벤트
-    'onAbort',
-    'onCanPlay',
-    'onCanPlayThrough',
-    'onDurationChange',
-    'onEmptied',
-    'onEncrypted',
-    'onEnded',
-    'onLoadedData',
-    'onLoadedMetadata',
-    'onLoadStart',
-    'onPause',
-    'onPlay',
-    'onPlaying',
-    'onProgress',
-    'onRateChange',
-    'onSeeked',
-    'onSeeking',
-    'onStalled',
-    'onSuspend',
-    'onTimeUpdate',
-    'onVolumeChange',
-    'onWaiting',
-
-    // 이미지/미디어 로딩
-    'onLoad',
-    'onError',
-
-    // 애니메이션/트랜지션 이벤트
-    'onAnimationStart',
-    'onAnimationEnd',
-    'onAnimationIteration',
-    'onTransitionEnd',
-
-    // 기타
-    'onPointerDown',
-    'onPointerMove',
-    'onPointerUp',
-    'onPointerCancel',
-    'onPointerEnter',
-    'onPointerLeave',
-    'onPointerOver',
-    'onPointerOut',
-    'onGotPointerCapture',
-    'onLostPointerCapture',
-
-    // UI 이벤트
-    'onScroll',
-    'onResize',
-    'onToggle',
-
-    // Composition 이벤트
-    'onCompositionStart',
-    'onCompositionUpdate',
-    'onCompositionEnd',
-]
+export const displayValueSet = new Set(displayValueList)
 
 export const pseudoClassList = [
     // Dynamic pseudo-classes
@@ -212,6 +115,8 @@ export const pseudoClassList = [
     'lang',
 ]
 
+export const pseudoClassSet = new Set(pseudoClassList)
+
 export const pseudoElementList = [
     // Text styling pseudo-elements
     'first-letter',
@@ -223,29 +128,20 @@ export const pseudoElementList = [
     'after',
 
     // Commonly supported experimental (조건부)
-    'placeholder', // 사용 빈도 높음 → 유지
+    'placeholder',
 ]
+
+export const pseudoElementSet = new Set(pseudoElementList)
 
 export const allPseudoList = [...pseudoClassList, ...pseudoElementList]
 
-export const flexCssList = [
-    'display', // flex
-    'flexFlow',
-    'flexDirection',
-    'flexWrap',
-    'justifyContent',
-    'alignContent',
-    'alignItems',
-    'alignSelf',
-    'justifySelf', // ✔ 일부 지원
-    'placeItems', // ✔ 축약형
-    'placeContent', // ✔ 축약형
-    'placeSelf', // ✔ 축약형
-    'gap',
-]
+export const allPseudoSet = new Set(allPseudoList)
 
-export const gridCssList = [
-    'display', // 반드시 'grid'여야 유효
+export const flexPropertyList = ['display', 'flexFlow', 'flexDirection', 'flexWrap', 'justifyContent', 'alignContent', 'alignItems', 'alignSelf', 'justifySelf', 'placeItems', 'placeContent', 'placeSelf', 'gap']
+export const flexPropertySet = new Set(flexPropertyList)
+
+export const gridPropertyList = [
+    'display',
     'gridTemplateColumns',
     'gridTemplateRows',
     'gridGap',
@@ -254,7 +150,6 @@ export const gridCssList = [
     'justifyItems',
     'placeItems',
     'placeContent',
-
     'gridTemplateRows',
     'gridTemplateColumns',
     'gridTemplateAreas',
@@ -262,120 +157,207 @@ export const gridCssList = [
     'rowGap',
     'columnGap',
     'gap',
-
     'gridAutoRows',
     'gridAutoColumns',
     'gridAutoFlow',
 ]
+export const gridPropertySet = new Set(gridPropertyList)
 
-export const tableCssList = [
-    'colspan', // 테이블 속성
-    'rowspan',
-    'cellSpacing',
-    'cellPadding',
-    'borderCollapse',
-    'captionSide',
-    'emptyCells',
-    'tableLayout',
-]
+export const tablePropertyList = ['colspan', 'rowspan', 'cellSpacing', 'cellPadding', 'borderCollapse', 'captionSide', 'emptyCells', 'tableLayout']
+export const tablePropertySet = new Set(tablePropertyList)
 
-const flexItems = [
-    'order', // flex 자식 속성들
-    'flex',
-    'flexGrow',
-    'flexShrink',
-    'flexBasis',
-    'alignSelf',
-]
+const paddingList = ['padding', 'paddingTop', 'paddingRight', 'paddingBottom', 'paddingLeft']
+const paddingAbbrList = ['pd', 'pt', 'pr', 'pb', 'pl', 'py', 'px']
+const marginList = ['margin', 'marginTop', 'marginRight', 'marginBottom', 'marginLeft']
+const marginAbbrList = ['mg', 'mt', 'mr', 'mb', 'ml', 'my', 'mx']
+const borderList = ['border', 'borderTop', 'borderBottom', 'borderRight', 'borderLeft', 'borderRadius', 'outline']
+const borderAbbrList = ['bd', 'bt', 'br', 'bb', 'bl', 'by', 'bx']
+const colorList = ['color', 'backgroundColor', 'caretColor']
+const layoutList = ['width', 'height', 'maxWidth', 'minWidth', 'maxHeight', 'minHeight', 'aspectRatio', 'boxSizing', 'position', 'top', 'right', 'bottom', 'left', 'zIndex']
+const typographyList = ['fontSize', 'fontWeight', 'fontFamily', 'textAlign', 'lineHeight', 'letterSpacing', 'textDecoration']
+const effectList = ['boxShadow', 'opacity', 'transition', 'transform', 'willChange']
+const animationList = ['animation', 'animationName', 'animationDuration', 'animationTimingFunction', 'animationDelay', 'animationIterationCount', 'animationDirection', 'animationFillMode', 'animationPlayState']
+const interactivityList = ['cursor', 'pointerEvents', 'userSelect', 'tabIndex']
+const mediaList = ['objectFit', 'resize']
+const listPropertyList = ['listStyle', 'listStyleType', 'listStyleImage', 'listStylePosition']
+const miscList = ['whiteSpace', 'all']
+const customCssList = ['easing']
+const flexItems = ['order', 'flex', 'flexGrow', 'flexShrink', 'flexBasis', 'alignSelf', 'justifySelf']
+const gridItems = ['gridRowStart', 'gridRowEnd', 'gridRow', 'gridColumnStart', 'gridColumnEnd', 'gridColumn', 'gridArea', 'alignSelf', 'justifySelf', 'placeSelf', 'order', 'zIndex']
 
-const gridItems = [
-    'gridRowStart', // grid 자식 속성들
-    'gridRowEnd',
-    'gridRow',
-    'gridColumnStart',
-    'gridColumnEnd',
-    'gridColumn',
-    'gridArea',
-    'alignSelf',
-    'justifySelf',
-    'placeSelf',
-    'order',
-    'zIndex',
-]
+export const basePropertyList = [
+    // 속성
+    ...paddingList,
+    ...paddingAbbrList,
+    ...marginList,
+    ...marginAbbrList,
+    ...borderList,
+    ...borderAbbrList,
 
-export const commonCssList = [
-    'padding', // 공통속성
-    'paddingLeft',
-    'paddingRight',
-    'paddingTop',
-    'paddingBottom',
-    'margin',
-    'marginTop',
-    'marginRight',
-    'marginBottom',
-    'marginLeft',
-    'backgroundColor',
-    'border',
-    'borderTop',
-    'borderBottom',
-    'borderRight',
-    'borderLeft',
-    'borderRadius',
-    'boxShadow',
-    'width',
-    'height',
-    'maxWidth',
-    'minWidth',
-    'maxHeight',
-    'minHeight',
-    'aspectRatio',
-    'boxSizing',
-    'outline',
-    'tabIndex',
-    'caretColor',
-    'pointerEvents',
-    'left',
-    'right',
-    'top',
-    'bottom',
-    'userSelect',
-    'cursor',
-    'position',
-    'zIndex',
-    'objectFit',
-    'resize',
-    'textAlign',
-    'lineHeight',
-    'letterSpacing',
-    'color',
-    'fontSize',
-    'fontWeight',
-    'textDecoration',
-    'fontFamily',
-    'alignSelf',
-    'justifySelf',
-    'opacity',
-    'transition',
-    'transform',
-    'whiteSpace',
-    'animation',
-    'willChange',
-    'all',
+    ...colorList,
+    ...layoutList,
+    ...typographyList,
+    ...effectList,
+    ...animationList,
+    ...interactivityList,
+    ...mediaList,
+
+    ...listPropertyList,
+    ...miscList,
+    ...customCssList,
     ...flexItems,
     ...gridItems,
 ]
 
-const lists = {
-    tableTagList,
-    displayList,
-    onEventList,
-    pseudoClassList,
-    pseudoElementList,
-    allPseudoList,
-    flexCssList,
-    gridCssList,
-    tableCssList,
-    commonCssList,
+export const basePropertySet = new Set(basePropertyList)
+
+const mouseEvent = ['onClick', 'onDoubleClick', 'onMouseDown', 'onMouseEnter', 'onMouseLeave', 'onMouseMove', 'onMouseOut', 'onMouseOver', 'onMouseUp', 'onContextMenu']
+const keyboardEvent = ['onKeyDown', 'onKeyPress', 'onKeyUp']
+const focusEvent = ['onFocus', 'onBlur', 'onFocusIn', 'onFocusOut']
+const formEvent = ['onChange', 'onInput', 'onInvalid', 'onSubmit', 'onReset']
+const touchEvent = ['onTouchCancel', 'onTouchEnd', 'onTouchMove', 'onTouchStart']
+const dragEvent = ['onDrag', 'onDragEnd', 'onDragEnter', 'onDragExit', 'onDragLeave', 'onDragOver', 'onDragStart', 'onDrop']
+const otherEvent = ['onWheel', 'onSelect', 'onCopy', 'onCut', 'onPaste', 'onLoad', 'onError', 'onPointerDown', 'onPointerMove', 'onPointerUp', 'onPointerCancel', 'onPointerEnter', 'onPointerLeave', 'onPointerOver', 'onPointerOut', 'onGotPointerCapture', 'onLostPointerCapture']
+const mediaEvent = [
+    'onAbort',
+    'onCanPlay',
+    'onCanPlayThrough',
+    'onDurationChange',
+    'onEmptied',
+    'onEncrypted',
+    'onEnded',
+    'onLoadedData',
+    'onLoadedMetadata',
+    'onLoadStart',
+    'onPause',
+    'onPlay',
+    'onPlaying',
+    'onProgress',
+    'onRateChange',
+    'onSeeked',
+    'onSeeking',
+    'onStalled',
+    'onSuspend',
+    'onTimeUpdate',
+    'onVolumeChange',
+    'onWaiting',
+]
+const animationEvent = ['onAnimationStart', 'onAnimationEnd', 'onAnimationIteration', 'onTransitionEnd']
+const uiEvent = ['onScroll', 'onResize', 'onToggle']
+const compositionEvnet = ['onCompositionStart', 'onCompositionUpdate', 'onCompositionEnd']
+
+export const onEventAllList = [...mouseEvent, ...keyboardEvent, ...focusEvent, ...formEvent, ...touchEvent, ...dragEvent, ...otherEvent, ...mediaEvent, ...animationEvent, ...uiEvent, ...compositionEvnet]
+
+export const onEventAllSet = new Set(onEventAllList)
+
+export const tableTag = {
+    list: tableTagList,
+    set: tableTagSet,
 }
 
-export default lists
+export const displayValue = {
+    list: displayValueList,
+    set: displayValueSet,
+}
+
+export const pseudoClass = {
+    list: pseudoClassList,
+    set: pseudoClassSet,
+}
+
+export const pseudoElement = {
+    list: pseudoElementList,
+    set: pseudoElementSet,
+}
+
+export const allPseudo = {
+    list: allPseudoList,
+    set: allPseudoSet,
+}
+
+export const onEventAll = {
+    list: onEventAllList,
+    set: onEventAllSet,
+}
+
+export const baseProperty = {
+    list: basePropertyList,
+    set: basePropertySet,
+}
+
+export const flexProperty = {
+    list: flexPropertyList,
+    set: flexPropertySet,
+}
+
+export const gridProperty = {
+    list: gridPropertyList,
+    set: gridPropertySet,
+}
+
+export const tableProperty = {
+    list: tablePropertyList,
+    set: tablePropertySet,
+}
+
+export const mergedBaseProperty = {
+    list: [...basePropertyList],
+    set: new Set([...basePropertyList]),
+}
+
+export const mergedFlexProperty = {
+    list: [...basePropertyList, ...flexPropertyList],
+    set: new Set([...basePropertyList, ...flexPropertyList]),
+}
+
+export const mergedGridProperty = {
+    list: [...basePropertyList, gridPropertyList],
+    set: new Set([...basePropertyList, gridPropertyList]),
+}
+
+export const mergedTableProperty = {
+    list: [...basePropertyList, ...tablePropertyList],
+    set: new Set([...basePropertyList, ...tablePropertyList]),
+}
+
+const propsMap = {
+    tableTag,
+    displayValue,
+
+    pseudoClass,
+    pseudoElement,
+
+    allPseudo,
+    onEventAll,
+
+    baseProperty,
+    flexProperty,
+    gridProperty,
+    tableProperty,
+
+    mergedBaseProperty,
+    mergedFlexProperty,
+    mergedGridProperty,
+    mergedTableProperty,
+}
+
+export default propsMap
+
+export const styleGroupMap = {
+    padding: paddingList,
+    paddingAbbr: paddingAbbrList,
+    margin: marginList,
+    marginAbbr: marginAbbrList,
+    border: borderList,
+    borderAbbr: borderAbbrList,
+    layout: layoutList,
+    effect: effectList,
+    typography: typographyList,
+    color: colorList,
+    interactivity: interactivityList,
+    media: mediaList,
+    misc: miscList,
+    flexItem: flexItems,
+    gridItem: gridItems,
+    list: listPropertyList,
+}

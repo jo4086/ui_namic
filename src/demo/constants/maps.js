@@ -8,14 +8,27 @@
  * displaySet
  */
 
-import lists from './lists'
-import sets from './sets'
+import propsMap from './lists'
 
 export const displayGroupMap = {
+    base: ['block', 'inline', 'inline-block', 'flow-root', 'list-item'],
     flex: ['flex', 'inline-flex'],
     grid: ['grid', 'inline-grid'],
     table: ['table', 'inline-table', 'table-row-group', 'table-header-group', 'table-footer-group', 'table-row', 'table-cell', 'table-column', 'table-column-group', 'table-caption'],
-    common: ['block', 'inline', 'inline-block', 'flow-root', 'list-item'],
+}
+
+export const displayListMap = {
+    base: propsMap.baseProperty.list,
+    flex: propsMap.flexProperty.list,
+    grid: propsMap.gridProperty.list,
+    table: propsMap.tableProperty.list,
+}
+
+export const displaySetMap = {
+    base: propsMap.mergedBaseProperty.set,
+    flex: propsMap.mergedFlexProperty.set,
+    grid: propsMap.mergedGridProperty.set,
+    table: propsMap.mergedTableProperty.set,
 }
 
 export const tableDisplayMap = {
@@ -31,25 +44,44 @@ export const tableDisplayMap = {
     col: 'table-column',
 }
 
-export const displayListMap = {
-    common: lists.commonCssList,
-    table: lists.tableCssList,
-    flex: lists.flexCssList,
-    grid: lists.gridCssList,
+export const paddingAbbrMap = {
+    pd: ['padding'],
+    pr: ['paddingRight'],
+    pl: ['paddingLeft'],
+    pt: ['paddingTop'],
+    pb: ['paddingBottom'],
+    py: ['paddingTop', 'paddingBottom'],
+    px: ['paddingLeft', 'paddingRight'],
 }
 
-export const displaySetMap = {
-    common: sets.displayCommonSet,
-    table: sets.displayTableSet,
-    flex: sets.displayFlexSet,
-    grid: sets.displayGridSet,
+export const marginAbbrMap = {
+    mg: ['margin'],
+    mt: ['marginTop'],
+    mr: ['marginRight'],
+    mb: ['marginBottom'],
+    ml: ['marginLeft'],
+    my: ['marginTop', 'marginBottom'],
+    mx: ['marginRight', 'marginLeft'],
+}
+
+export const borderAbbrMap = {
+    bd: ['border'],
+    bt: ['borderTop'],
+    br: ['borderRight'],
+    bb: ['borderBottom'],
+    bl: ['borderLeft'],
+    by: ['borderTop', 'borderBottom'],
+    bx: ['borderLeft', 'borderRight'],
 }
 
 const maps = {
     displayGroupMap,
-    tableDisplayMap,
     displayListMap,
     displaySetMap,
+    tableDisplayMap,
+    paddingAbbrMap,
+    marginAbbrMap,
+    borderAbbrMap,
 }
 
 export default maps

@@ -5,7 +5,7 @@
  * - List of HTML table-related tag names.
  * - e.g., ['table', 'caption', 'col', ...]
  *
- * @constant {Array} displayList
+ * @constant {Array} displayValueList
  * - List of supported CSS display property values
  * - e.g., ['flex', 'grid', 'block', 'table-row', ...]
  *
@@ -18,11 +18,12 @@
  * - e.g., 'flex' → ['flex', 'inline-flex']
  */
 
-import { tableTagList, displayList } from '../constants' // import: List
+import { tableTagList, displayValueList } from '../constants' // import: List
+import { tableTagSet } from '../constants'
 import { tableDisplayMap, displayGroupMap } from '../constants' // import: Map
 
-const tableTagSet = new Set(tableTagList)
-const displaySet = new Set(displayList)
+// const tableTagSet = new Set(tableTagList)
+const displayValueSet = new Set(displayValueList)
 
 /**
  * @function displayValidator
@@ -41,6 +42,8 @@ const displaySet = new Set(displayList)
 
 function displayValidator(type, display) {
     const getDisplay = tableTagSet.has(type) ? tableDisplayMap[type] : display
+
+    // console.log('getDisplay:', getDisplay)
 
     validDisplay(getDisplay, type)
 
@@ -69,8 +72,8 @@ export default displayValidator
  */
 
 const validDisplay = (display, type) => {
-    if (!displaySet.has(display)) {
-        throw new Error(`Invalid display value "${display}" for type "${type}". Allowed values: ${[...displaySet].join(', ')}`)
+    if (!displayValueSet.has(display)) {
+        throw new Error(`Invalid display value "${display}" for type "${type}". Allowed values: ${[...displayValueSet].join(', ')}`)
     }
 }
 
@@ -89,5 +92,5 @@ const patchDisplayGroup = (display) => {
     for (const group in displayGroupMap) {
         if (displayGroupMap[group].includes(display)) return group
     }
-    return 'common' // 기본값
+    return 'base' // 기본값
 }
