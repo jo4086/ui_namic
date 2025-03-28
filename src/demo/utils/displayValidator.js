@@ -1,14 +1,6 @@
-// ../utils/displayValidator.js
+// utils/displayValidator.js
 
 /**
- * @constant {Array} tableTagList
- * - List of HTML table-related tag names.
- * - e.g., ['table', 'caption', 'col', ...]
- *
- * @constant {Array} displayValueList
- * - List of supported CSS display property values
- * - e.g., ['flex', 'grid', 'block', 'table-row', ...]
- *
  * @constant {Object} tableDisplayMap
  * - Key-value map of HTML table elements to their default CSS display properties.
  * - e.g., 'thead' → 'table-header-group'
@@ -18,12 +10,8 @@
  * - e.g., 'flex' → ['flex', 'inline-flex']
  */
 
-import { tableTagList, displayValueList } from '../constants' // import: List
-import { tableTagSet } from '../constants'
+import { tableTagSet, displayValueSet } from '../constants'
 import { tableDisplayMap, displayGroupMap } from '../constants' // import: Map
-
-// const tableTagSet = new Set(tableTagList)
-const displayValueSet = new Set(displayValueList)
 
 /**
  * @function displayValidator

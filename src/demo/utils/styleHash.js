@@ -1,4 +1,4 @@
-// ../utils/styleHash.js
+// utils/styleHash.js
 
 export const styleCache = new Map()
 

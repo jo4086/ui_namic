@@ -1,0 +1,34 @@
+## directory-tree.md
+
+### _ui_namic_
+
+-   **src/**
+    -   App.js
+    -   **demo/**
+        -   styledCore.js
+        -   propsFilterCore.js
+        -   _directory-tree.md_
+        -   **utils/**
+            -   callback.js
+            -   camelToKebab.js
+            -   displayValidator.js
+            -   insertStyleOnce.js
+            -   styled.js
+            -   styleHash.js
+            -   useDynamicTrigger.js
+        -   **ui/**
+            -   Box.jsx
+            -   Button.jsx
+            -   globalStyle.js
+            -   theme.js
+        -   **pages/**
+            -   Demo.jsx
+        -   **generators/**
+            -   createItem.js
+        -   **constants/**
+            -   index.js
+            -   list-set.js
+            -   maps.js
+        -   **components/**
+            -   CardContaier.jsx
+-   _dev-log.md_

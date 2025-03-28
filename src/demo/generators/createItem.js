@@ -1,4 +1,4 @@
-// src/demo/generators/createItem.js
+// generators/createItem.js
 
 import React from 'react'
 import propsFilterCore from '../propsFilterCore'
@@ -15,7 +15,7 @@ const createItem = ({ type: defaultType = 'div', display: defaultDisplay = 'bloc
         const resolvedDynamicType = dynamicType || defaultDynamicType
         const mergedStyle = { ...defaultBaseStyle, ...dynamicStyle }
 
-        console.log('mergedStyle:', mergedStyle)
+        // console.log('mergedStyle:', mergedStyle)
 
         const { style, other, className, dynamicTrigger, patchDisplay } = propsFilterCore({
             type: resolvedType,
@@ -24,8 +24,8 @@ const createItem = ({ type: defaultType = 'div', display: defaultDisplay = 'bloc
             props: restProps,
             dynamicStyle: mergedStyle,
         })
-        console.log('style:', style)
-        console.log('other:', other)
+        // console.log('style:', style)
+        // console.log('other:', other)
 
         styledCore(style)
 

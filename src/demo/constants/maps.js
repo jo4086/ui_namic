@@ -1,4 +1,4 @@
-// ../constants/maps.js
+// constants/maps.js
 
 /** INDEX
  * -- naming role `${name}Map` --
@@ -8,7 +8,7 @@
  * displaySet
  */
 
-import propsMap from './lists'
+import propsMap from './list-set'
 
 export const displayGroupMap = {
     base: ['block', 'inline', 'inline-block', 'flow-root', 'list-item'],

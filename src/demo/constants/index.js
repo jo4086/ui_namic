@@ -1,9 +1,9 @@
-// ..constants/index.js
+// constants/index.js
 
-export * from './lists'
+// import propsMap from './list-set'
+
+export * from './list-set'
 export * from './maps'
-// export * from './sets'
 
-// export { default as sets } from './sets'
-export { default as propsMap } from './lists'
+export { default as propsMap } from './list-set'
 export { default as maps } from './maps'

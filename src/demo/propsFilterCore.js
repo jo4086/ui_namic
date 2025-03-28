@@ -1,4 +1,4 @@
-// ./propsFilterCore.js
+// propsFilterCore.js
 
 import displayValidator from './utils/displayValidator'
 import { onEventAllSet, displaySetMap } from './constants'

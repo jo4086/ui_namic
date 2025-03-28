@@ -1,4 +1,4 @@
-// ../utils/insertStyleOnce.js
+// utils/insertStyleOnce.js
 
 const insertedStyleIds = new Set() // 글로벌 범위 캐시
 

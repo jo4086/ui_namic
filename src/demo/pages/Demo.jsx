@@ -1,4 +1,4 @@
-// Demo.jsx
+// pages/Demo.jsx
 import Box from '../ui/Box'
 import Button from '../ui/Button'
 import CardContainer from '../components/CardContainer'
@@ -52,17 +52,18 @@ const BoxStyle4 = {
     },
 
     media: {
-        self: [
+        range: [
             { min: 768, max: 1023, width: '200px', height: '50px' },
             { min: 1024, max: 1279, width: '300px', height: '100px' },
         ],
         down: [
-            { max: 1023, width: '200px', height: '50px' },
-            { max: 1279, width: '300px', height: '100px' },
+            { point: 1023, width: '200px', height: '50px' },
+            { point: 1279, width: '300px', height: '100px' },
+            { point: 1439, width: '400px', height: '150px' },
         ],
         up: [
-            { min: 768, width: '200px', height: '50px' },
-            { min: 1280, width: '300px', height: '100px' },
+            { point: 768, width: '200px', height: '50px' },
+            { point: 1280, width: '300px', height: '100px' },
         ],
     },
 

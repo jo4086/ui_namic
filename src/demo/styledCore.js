@@ -1,4 +1,4 @@
-// ./styledCore.js
+// styledCore.js
 
 import camelToKebab from './utils/camelToKebab.js'
 import { forEachObject, forEachNestedObject } from './utils/callback.js'
@@ -10,14 +10,212 @@ const easingSet = new Set(['easing'])
 function styledCore(props) {
     const { dynamic, keyframes, media, pseudo, ...rest } = props
 
-    console.log('rest:', rest)
+    // console.log('rest:', rest)
 
     const { animation, css } = buildKeyframesBundle(keyframes)
+    const cssBlock = buildCssBlock(rest)
+
+    buildMediaBundle2(media)
+
+    // console.log('cssBlock\n' + cssBlock)
     // console.log('animation:', animation)
     // console.log('css:', css)
 }
 
 export default styledCore
+
+const optionList = ['vertical', 'horizontal', 'hover']
+const optionMap = {
+    vertical: 'orientation: portrait',
+    horizontal: 'orientation: landscape',
+}
+
+// function formatKey(data) {
+//     const result = {}
+
+//     forEachObject(data, (key, value) => {
+//         let formatValue
+//         typeof value === 'number' ? (formatValue = value + 'px') : (formatValue = value)
+//         let formatKey = `${key}-width`
+
+//         result[formatKey] = formatValue
+//     })
+
+//     return result
+// }
+function buildMediaBundle2(media) {
+    if (!media) return []
+
+    function formattedPoint(data) {
+        const conditions = []
+
+        if (data.min !== undefined) {
+            const min = typeof data.min === 'number' ? `${data.min}px` : data.min
+            conditions.push(`(min-width: ${min})`)
+        }
+
+        if (data.max !== undefined) {
+            const max = typeof data.max === 'number' ? `${data.max}px` : data.max
+            conditions.push(`(max-width: ${max})`)
+        }
+
+        if (data.point !== undefined) {
+            const point = typeof data.point === 'number' ? `${data.point}px` : data.point
+
+            conditions.push(`()`)
+        }
+
+        return conditions.join(' and ')
+    }
+
+    function generateRangeBlock(range) {
+        const result = []
+
+        const bulitBlock = range.map((item) => {
+            const { min = null, max = null, ...style } = item
+            const condition = formattedPoint({ min, max })
+            return { condition, style }
+        })
+        result.push(...bulitBlock)
+
+        return result
+    }
+
+    function generateUpDownBlock(position, data) {
+        const positionMap = {
+            up: 'min-width',
+            down: 'max-width',
+        }
+
+        // console.log('upDown', upDown)
+        console.log('position:', position)
+
+        const result = []
+
+        console.log('data:', data)
+
+        const bulitBlock = data.map((item) => {
+            const { point = null, ...style } = item
+
+            console.log('style:', style)
+        })
+    }
+
+    const result = []
+
+    const rangeSet = new Set(['range'])
+    const upDownSet = new Set(['up', 'down'])
+
+    forEachObject(media, (key, value) => {
+        if (rangeSet.has(key)) {
+            const rangeBlock = generateRangeBlock(value)
+
+            console.log('rangeBlock:', rangeBlock)
+        }
+
+        if (upDownSet.has(key)) {
+            console.log('upDownSet key:', key)
+            generateUpDownBlock(key, value)
+        }
+    })
+
+    for (const [key, value] of Object.entries(media)) {
+        if (rangeSet.has(key)) {
+            const builtRange = value.map((item) => {
+                const { min = null, max = null, ...style } = item
+                const condition = formattedPoint({ min, max })
+                return { condition, style }
+            })
+            result.push(...builtRange)
+        }
+
+        if (upDownSet.has(key)) {
+            // console.log('upDownSet key:', key)
+        }
+    }
+
+    console.log('result:', result)
+
+    // const buildRangePoint = range.map((key, i) => {
+    //     console.log('min:', key.min, 'max:', key.max)
+
+    //     const { min = [], max = [] } = key
+    //     console.log('min:', min, 'max:', max)
+    // })
+
+    // const buildDownPoint = down.map((key, i) => {
+    //     const { point = null, ...style } = key
+    // })
+
+    // const buildUpPoint = up.map((key, i) => {
+    //     const { point = null, ...style } = key
+    //     console.log('style:', style)
+    //     console.log('point:', point)
+    // })
+}
+
+function buildMediaBundle(media) {
+    if (!media) return []
+
+    console.log('media.self =>', media.self, '\nmedia.down =>', media.down, '\nmedia.up =>', media.up)
+
+    const allItems = [...(media.self || []), ...(media.down || []), ...(media.up || [])]
+
+    const conditionMap = new Map()
+
+    allItems.forEach((item) => {
+        const { min, max, ...style } = item
+
+        const key = [min !== undefined ? `min:${min}` : '', max !== undefined ? `max:${max}` : ''].filter(Boolean).join('&')
+
+        if (!conditionMap.has(key)) {
+            conditionMap.set(key, [])
+        }
+
+        conditionMap.get(key).push(style)
+    })
+
+    const result = []
+
+    for (const [key, styleGroup] of conditionMap.entries()) {
+        const [minPart, maxPart] = key.split('&')
+        const conditions = []
+        if (minPart) conditions.push(`(min-width: ${minPart.split(':')[1]}px)`)
+        if (maxPart) conditions.push(`(max-width: ${maxPart.split(':')[1]}px)`)
+
+        const mergedStyle = Object.assign({}, ...styleGroup)
+
+        result.push({
+            condition: conditions.join(' and '),
+            style: mergedStyle,
+        })
+    }
+
+    console.log('result:', result)
+
+    return result
+}
+
+function buildCssBlock(string) {
+    // console.log('string:', string)
+
+    const blocks = []
+
+    forEachObject(string, (key, value) => {
+        const kebabKey = camelToKebab(key)
+
+        // console.log('kebabKey:', kebabKey)
+
+        const block = `${kebabKey} : ${value};`
+        // console.log('block', block)
+        blocks.push(block)
+    })
+
+    const result = blocks.join('\n')
+    // console.log(blocks.join('\n'))
+
+    return result
+}
 
 function buildKeyframesBundle(keyframes) {
     /**
@@ -66,15 +264,15 @@ function buildKeyframesBundle(keyframes) {
             const propertyArray = []
 
             forEachObject(styles, (propKey, propValue) => {
-                let patchKey
+                let brackPoints
 
                 if (easingSet.has(propKey)) {
-                    patchKey = 'animationTimingFunction'
+                    brackPoints = 'animationTimingFunction'
                 } else {
-                    patchKey = propKey
+                    brackPoints = propKey
                 }
 
-                const kebabKey = camelToKebab(patchKey)
+                const kebabKey = camelToKebab(brackPoints)
                 propertyArray.push(`${kebabKey}: ${propValue};`)
             })
 
@@ -93,18 +291,18 @@ function buildKeyframesBundle(keyframes) {
 
     function keyframesAnalyze(obj) {
         const animationArray = []
-        const patchKeyframes = {}
+        const brackPointsframes = {}
 
         forEachObject(obj, (key, value) => {
             const getAnimation = typeof value.animation === 'string' ? exAnimation(key, value) : nonAnimation(key, value)
 
             animationArray.push(getAnimation)
 
-            patchKeyframes[key] = value.percent
+            brackPointsframes[key] = value.percent
         })
 
         const animation = 'animation: ' + animationArray.join(', ')
-        const css = generateKeyframesCss(patchKeyframes)
+        const css = generateKeyframesCss(brackPointsframes)
 
         // console.log('%cAnimation', 'font-weight:bold', '\n' + animation)
         // console.log('%cCSS', 'font-weight:bold', '\n' + css)

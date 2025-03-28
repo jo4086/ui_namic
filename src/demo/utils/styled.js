@@ -1,4 +1,4 @@
-// src/demo/styled.js
+// utils/styled.js
 
 // import React from 'react'
 import createItem from '../generators/createItem'

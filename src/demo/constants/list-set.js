@@ -1,4 +1,4 @@
-// ../constants/lists.js
+// constants/list-set.js
 
 /**
  * 🔹 EXPORT STRUCTURE
@@ -33,7 +33,7 @@
  * props.onEventAll.list
  */
 
-export const tableTagList = ['table', 'caption', 'thead', 'tfoot', 'tbody', 'colgroup', 'tr', 'td', 'th', 'col']
+ export const tableTagList = ['table', 'caption', 'thead', 'tfoot', 'tbody', 'colgroup', 'tr', 'td', 'th', 'col']
 
 export const tableTagSet = new Set(tableTagList)
 
@@ -175,7 +175,8 @@ const borderAbbrList = ['bd', 'bt', 'br', 'bb', 'bl', 'by', 'bx']
 const colorList = ['color', 'backgroundColor', 'caretColor']
 const layoutList = ['width', 'height', 'maxWidth', 'minWidth', 'maxHeight', 'minHeight', 'aspectRatio', 'boxSizing', 'position', 'top', 'right', 'bottom', 'left', 'zIndex']
 const typographyList = ['fontSize', 'fontWeight', 'fontFamily', 'textAlign', 'lineHeight', 'letterSpacing', 'textDecoration']
-const effectList = ['boxShadow', 'opacity', 'transition', 'transform', 'willChange']
+const effectList = ['boxShadow', 'opacity', 'transform', 'willChange']
+const transitionList = ['transition', 'trnasititon-property', 'transition-duration', 'transition-timing-function', 'transition-delay', 'transition-behavior']
 const animationList = ['animation', 'animationName', 'animationDuration', 'animationTimingFunction', 'animationDelay', 'animationIterationCount', 'animationDirection', 'animationFillMode', 'animationPlayState']
 const interactivityList = ['cursor', 'pointerEvents', 'userSelect', 'tabIndex']
 const mediaList = ['objectFit', 'resize']
@@ -198,6 +199,7 @@ export const basePropertyList = [
     ...layoutList,
     ...typographyList,
     ...effectList,
+    ...transitionList,
     ...animationList,
     ...interactivityList,
     ...mediaList,

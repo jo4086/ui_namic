@@ -1,4 +1,4 @@
-// ../utils/callback.js
+// utils/callback.js
 
 export function forEachObject(obj, callback) {
     for (const [key, value] of Object.entries(obj)) {

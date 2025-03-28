@@ -1,4 +1,4 @@
-// ..utils/useDynamicTrigger.js
+// utils/useDynamicTrigger.js
 
 import { useState, useCallback } from 'react'
 

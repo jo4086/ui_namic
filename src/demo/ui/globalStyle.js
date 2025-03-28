@@ -1,3 +1,5 @@
+// ui/globalStyle.js
+
 const globalStyle = {
     listStyleType: 'none',
     outline: 'none',

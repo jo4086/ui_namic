@@ -1,3 +1,5 @@
+// ui/Button.jsx
+
 import createItem from '../generators/createItem'
 
 const Button = createItem({

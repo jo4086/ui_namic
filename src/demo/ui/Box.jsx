@@ -1,3 +1,5 @@
+// ui/Box.jsx
+
 import createItem from '../generators/createItem'
 import globalStyle from './globalStyle'
 
