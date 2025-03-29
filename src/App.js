@@ -1,4 +1,5 @@
 import Demo from './demo/pages/Demo'
+import './App.css'
 
 function normalizeTransitionArray(input) {
     if (typeof input === 'string') return input

@@ -11,4 +11,5 @@ export function insertStyleOnce(id, cssText) {
     document.head.appendChild(style)
 
     insertedStyleIds.add(id)
+    console.log('insertStyleIds:', insertedStyleIds)
 }

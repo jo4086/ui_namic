@@ -52,9 +52,9 @@ const BoxStyle4 = {
     },
 
     media: {
-        range: [
-            { min: 768, max: 1023, width: '200px', height: '50px' },
-            { min: 1024, max: 1279, width: '300px', height: '100px' },
+        between: [
+            { up: 768, down: 1023, width: '200px', height: '50px' },
+            { up: 1024, down: 1279, width: '300px', height: '100px' },
         ],
         down: [
             { point: 1023, width: '200px', height: '50px' },
@@ -65,6 +65,7 @@ const BoxStyle4 = {
             { point: 768, width: '200px', height: '50px' },
             { point: 1280, width: '300px', height: '100px' },
         ],
+        advanced: [{ query: 'screen, (min-width: 768px) and (max-width: 1023px)', width: '300px' }],
     },
 
     pseudo: {
@@ -122,7 +123,9 @@ const restProps = {
 const Demo = () => {
     return (
         <>
-            <Box dynamicStyle={BoxStyle4} {...restProps}></Box>
+            <Box dynamicStyle={BoxStyle4} {...restProps}>
+                {/* <Box>HI</Box> */}
+            </Box>
         </>
         /*     <CardContainer>
             <Box dynamicStyle={BoxStyle} {...restProps} type="input">

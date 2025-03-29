@@ -1,16 +1,32 @@
 // utils/styleHash.js
 
-export const styleCache = new Map()
+import { insertStyleOnce } from './insertStyleOnce'
+
+function generateClassName(key) {
+    return 'dynamic-' + btoa(key).slice(0, 6)
+}
+
+function camelToKebab(str) {
+    return str.replace(/([A-Z])/g, '-$1').toLowerCase()
+}
+
+function styleToCssText(selector, styleObj) {
+    const props = Object.entries(styleObj)
+        .map(([key, value]) => `${camelToKebab(key)}: ${value};`)
+        .join('\n')
+
+    return `${selector} {\n${props}\n}`
+}
+
+const styleCache = new Map()
 
 export function getOrCreateStyle(styleObj) {
-    const key = JSON.stringify(styleObj) // 더 나은 방법은 sha256 해시
-    if (styleCache.has(key)) {
-        return styleCache.get(key) // className or cssText
-    }
+    const key = JSON.stringify(styleObj)
+    if (styleCache.has(key)) return styleCache.get(key)
 
-    const className = generateClassName(key) // 예: 'dynamic-abc123'
+    const className = generateClassName(key)
     const cssText = styleToCssText(`.${className}`, styleObj)
-    insertStyleOnce(className, cssText) // 중복 삽입 방지 로직 포함
+    insertStyleOnce(className, cssText)
 
     const result = { className, cssText }
     styleCache.set(key, result)

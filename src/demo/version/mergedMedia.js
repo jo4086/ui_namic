@@ -2,8 +2,6 @@
 
 import camelToKebab from './utils/camelToKebab.js'
 import { forEachObject, forEachNestedObject } from './utils/callback.js'
-import { getOrCreateStyle } from './utils/styleHash.js'
-import { insertStyleOnce } from './utils/insertStyleOnce.js'
 
 const animationPropertyList = ['duration', 'easing', 'delay', 'iteration', 'direction', 'fillMode', 'playState']
 const animationPropertySet = new Set(animationPropertyList)
@@ -14,22 +12,14 @@ function styledCore(props) {
 
     // console.log('rest:', rest)
 
-    const generatedClassName = generateClassName(props)
-
-    // console.log('generatedClassName:', generatedClassName)
-
     const { animation, css } = buildKeyframesBundle(keyframes)
     const cssBlock = buildCssBlock(rest)
 
     buildMediaBundle(media)
 
-    console.log('cssBlock\n' + cssBlock)
+    // console.log('cssBlock\n' + cssBlock)
     // console.log('animation:', animation)
     // console.log('css:', css)
-
-    const fullCssText = `${cssBlock}\n\n.${generateClassName} {\n    ${animation}}`
-
-    insertStyleOnce(generateClassName, fullCssText)
 }
 
 export default styledCore
@@ -40,109 +30,150 @@ const optionMap = {
     horizontal: 'orientation: landscape',
 }
 
-function generateClassName(key) {
-    return 'dynamic-' + btoa(key).slice(0, 6)
-}
-
-// 3차버전
 function buildMediaBundle(media) {
     if (!media) return []
 
-    const positionMap = {
-        up: 'min-width',
-        down: 'max-width',
+    let upCount = 0
+    let downCount = 0
+    const upBlocks = {}
+    const downBlocks = {}
+    function buildMediaQueryConditions(data) {
+        const conditions = []
+
+        if (data.up !== undefined) {
+            upCount += 1
+            const up = typeof data.up === 'number' ? `${data.up}px` : data.up
+
+            console.log('upCount:', upCount)
+
+            const upBlock = {
+                property: 'between',
+                direction: 'up',
+                value: data.up,
+            }
+
+            console.log('a:', upBlock)
+
+            upBlocks[upCount] = upBlock
+
+            // upBlocks.push()
+
+            conditions.push(`(min-width: ${up})`)
+        }
+
+        if (data.down !== undefined) {
+            downCount += 1
+            const down = typeof data.down === 'number' ? `${data.down}px` : data.down
+
+            console.log('downCount:', downCount)
+
+            const downBlock = {
+                property: 'between',
+                direction: 'down',
+                value: data.down,
+            }
+
+            downBlocks[downCount] = downBlock
+
+            conditions.push(`(max-width: ${down})`)
+        }
+
+        if (data.point !== undefined) {
+            if (data.position === 'up') {
+                upCount += 1
+
+                const upBlock = {
+                    property: 'up',
+                    direction: 'up',
+                    value: data.point,
+                }
+
+                upBlocks[upCount] = upBlock
+
+                console.log('position Up:', upBlock)
+            } else if (data.position === 'down') {
+                downCount += 1
+
+                const downBlock = {
+                    property: 'down',
+                    direction: 'down',
+                    value: data.point,
+                }
+
+                downBlocks[downCount] = downBlock
+            }
+            const point = typeof data.point === 'number' ? `${data.point}px` : data.point
+
+            console.log('position:', data.position)
+
+            conditions.push(`(${data.matchPosition}: ${point})`)
+        }
+
+        console.log('upBlocks:', upBlocks)
+        console.log('downBlocks:', downBlocks)
+
+        return conditions
+    }
+
+    function generateBetweenBlock(between) {
+        const mediaBundle = []
+
+        const builtBlock = between.map((item) => {
+            const { up = null, down = null, ...style } = item
+
+            const condition = buildMediaQueryConditions({ up, down })
+
+            return { condition, style }
+        })
+        mediaBundle.push(...builtBlock)
+
+        return mediaBundle
+    }
+
+    function generateUpDownBlock(position, data) {
+        const positionMap = {
+            up: 'min-width',
+            down: 'max-width',
+        }
+
+        const mediaBundle = []
+
+        const builtBlock = data.map((item) => {
+            const { point = null, ...style } = item
+
+            const matchPosition = positionMap[position]
+
+            const condition = buildMediaQueryConditions({ matchPosition, position, point })
+
+            return { condition, style }
+        })
+
+        mediaBundle.push(...builtBlock)
+
+        return mediaBundle
     }
 
     const result = []
 
-    const ensurePx = (value) => (typeof value === 'number' ? `${value}px` : value)
-
-    const processBlock = (type, list) => {
-        return list.map((item) => {
-            let conditions = []
-            let style = { ...item }
-
-            if (type === 'between') {
-                const { up, down, ...rest } = item
-                if (up) conditions.push(`(min-width: ${ensurePx(up)})`)
-                if (down) conditions.push(`(max-width: ${ensurePx(down)})`)
-                style = rest
-            } else {
-                const { point, ...rest } = item
-                const condition = `(${positionMap[type]}: ${ensurePx(point)})`
-                conditions.push(condition)
-                style = rest
-            }
-
-            return { condition: conditions, style }
-        })
-    }
+    const betweenSet = new Set(['between'])
+    const upDownSet = new Set(['up', 'down'])
 
     forEachObject(media, (key, value) => {
-        if (key === 'between' || key === 'up' || key === 'down') {
-            const blocks = processBlock(key, value)
-            result.push(...blocks)
+        if (betweenSet.has(key)) {
+            const betweenBlock = generateBetweenBlock(value)
+
+            result.push(betweenBlock)
         }
 
-        if (key === 'advanced') {
-            const advancedBlocks = value.map(({ query, ...style }) => ({
-                condition: [query],
-                style,
-            }))
-            result.push(...advancedBlocks)
+        if (upDownSet.has(key)) {
+            const upDownBlock = generateUpDownBlock(key, value)
+
+            result.push(upDownBlock)
         }
     })
 
-    console.log(result)
-
-    return result
+    console.log('result:', result)
 }
-
-/* 2차 버전
-function buildMediaBundle(media) {
-    if (!media) return []
-
-    const positionMap = {
-        up: 'min-width',
-        down: 'max-width',
-    }
-
-    const result = []
-
-    const processBlock = (type, list) => {
-        return list.map((item) => {
-            let conditions = []
-            let style = { ...item }
-
-            if (type === 'between') {
-                const { up, down, ...rest } = item
-                if (up) conditions.push(`(min-width: ${ensurePx(up)})`)
-                if (down) conditions.push(`(max-width: ${ensurePx(down)})`)
-                style = rest
-            } else {
-                const { point, ...rest } = item
-                const condition = `(${positionMap[type]}: ${ensurePx(point)})`
-                conditions.push(condition)
-                style = rest
-            }
-
-            return { condition: conditions, style }
-        })
-    }
-
-    const ensurePx = (value) => (typeof value === 'number' ? `${value}px` : value)
-
-    forEachObject(media, (key, value) => {
-        if (key === 'between' || key === 'up' || key === 'down') {
-            const blocks = processBlock(key, value)
-            result.push(...blocks)
-        }
-    })
-
-    console.log(result)
-
-    return result
-} */
 
 // function buildMediaBundle(media) {
 //     if (!media) return []
@@ -429,3 +460,28 @@ const pseudoType = (obj) => {
     const string = objectToCss(rest)
     dynamicKey(dynamic)
     */
+
+// const media = {
+//     between: [
+//         { up: 768, down: 1023, width: '200px', height: '50px' },
+//         { up: 1024, down: 1279, width: '300px', height: '100px' },
+//     ],
+//     down: [
+//         { point: 1023, width: '200px', height: '50px' },
+//         { point: 1279, width: '300px', height: '100px' },
+//         { point: 1439, width: '400px', height: '150px' },
+//     ],
+//     up: [
+//         { point: 768, width: '200px', height: '50px' },
+//         { point: 1280, width: '300px', height: '100px' },
+//     ],
+//     advanced: [{ query: 'screen, (min-width: 768px) and (max-width: 1023px)', width: '300px' }],
+// }
+
+// const media = {
+//     [up('768')]: { width: '200px', height: '50px' },
+//     [down('1023')]: { width: '200px', height: '50px' },
+//     [down('779')]: { width: '150px', height: '25px' },
+//     [between('768')('1023')]: { width: '200px', height: '50px' },
+//     [query('screen, (min-width: 768px) and (max-width: 1023px)')]: { width: '300px', height: '200px' },
+// }

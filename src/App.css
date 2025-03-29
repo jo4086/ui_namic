@@ -1,38 +1,94 @@
-.App {
-  text-align: center;
+.box {
+    background-color: lightblue;
+    color: black;
+    padding: 20px;
+    font-size: 16px;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+/* 768px 이상에서는 글자색을 blue로 바꿈 */
+@media (min-width: 768px) {
+    .box {
+        color: blue;
+    }
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+/* 1024px 이상에서는 배경색을 lightgreen으로 바꿈 */
+@media (min-width: 1024px) {
+    .box {
+        background-color: lightgreen;
+    }
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+.box2 {
+    background-color: lightgray;
+    color: black;
+    padding: 20px;
+    font-size: 16px;
 }
 
-.App-link {
-  color: #61dafb;
+@media (min-width: 860px) {
+    .box2 {
+        background-color: lightgreen;
+    }
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+@media (max-width: 1023px) {
+    .box2 {
+        width: 400px;
+    }
 }
+
+@media (min-width: 768px) and (max-width: 1023px) {
+    .box2 {
+        color: blue;
+    }
+}
+
+.box3 {
+    background-color: lightgray;
+    color: black;
+    padding: 20px;
+    font-size: 16px;
+}
+
+@media (min-width: 860px) {
+    .box3 {
+        background-color: lightgreen;
+    }
+}
+
+@media (max-width: 1023px) {
+    .box3 {
+        width: 400px;
+    }
+}
+
+@media (min-width: 768px) and (max-width: 859px) {
+    .box3 {
+        color: blue;
+        width: 400px;
+    }
+}
+
+/* 860 ~ 1023 */
+@media (min-width: 860px) and (max-width: 1023px) {
+    .box3 {
+        color: blue;
+        background-color: lightgreen;
+        width: 400px;
+    }
+}
+
+/* @media (min-width: 860px), (min-width: 768px) and (max-width: 1023px) {
+    .box2 {
+        background-color: lightgreen;
+        color: blue;
+    }
+} */
+
+/* 768 ~ 1023 */
+/* @media (min-width: 768px) and (max-width: 1023px) {
+    .box2 {
+        color: blue;
+    }
+} */
